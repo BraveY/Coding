@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool Find(int target, vector<vector<int> > array) {
-        if (array.empty()) exit(1);
+        // if (array.empty()) exit(1); 牛客网上不考虑，否则不会在主函数 return 0
         int row = array.size();
         int col = array[0].size();
         int i = 0; int j = col - 1;
