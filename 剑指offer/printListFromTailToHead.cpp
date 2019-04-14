@@ -15,7 +15,7 @@ public:
         if (head != NULL){
             (/*if (head->next == NULL) reverse_list.push_back(head->val);
             else reverse_list = printListFromTailToHead(head->next);
-            使用这种逻辑，不能ac，大量样例不能通过，还需要分析下
+            使用这种逻辑，不能ac，大量样例不能通过，还需要分析下  递归的入口需要在最前面
             )
 
 
