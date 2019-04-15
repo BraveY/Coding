@@ -4,14 +4,11 @@ https://www.nowcoder.com/practice/9f3231a991af4f55b95579b44b7a01ba?tpId=13&tqId=
 class Solution {
 public:
     int minNumberInRotateArray(vector<int> rotateArray) {
-        /* 暴力解法 O(N)
-        if(rotateArray.empty()) return 0;
+        /*if(rotateArray.empty()) return 0;
         int len = rotateArray.size();
-        // if(len==1|| rotateArray[0] == rotateArray[len-1]) return rotateArray[0]; 
-        // 首尾相等包含有分界点的情况，{1,1,1,1,2,2,1,1} 这种
-        if(len==1]) return rotateArray[0]; // 可以不要，因为为0的时候不会进入for循环
+        if(len==1) return rotateArray[0];
         int rotate_index = 0;
-        for(int i=0; i<len-1; i++){ 	// 会使用数组后一位的时候，遍历条件是小于len-1，不然当迭代到len-1的时候会造成越界
+        for(int i=0; i<len; i++){
             if(rotateArray[i]>rotateArray[i+1]){
                 rotate_index = i+1;
                 break;
@@ -19,5 +16,25 @@ public:
         }
         return rotateArray[rotate_index];
         */
+        // 二分查找 O(logn)
+        if(rotateArray.empty()) return 0;
+        int len = rotateArray.size();
+        int ind = len/2;
+        int head = 0;
+        int tail = len-1;
+        while(head<tail){  //这个是不能退出循环的到最后只有两个元素是会陷入死循环，所以需要设置退出条件
+            if((tail-head)==1){  //退出条件tail比head大一
+                ind = tail;
+                break;
+            }
+            if(rotateArray[ind]>= rotateArray[head]) { //在第一个递增数组，移动head指针
+                head = ind;  
+            }
+            if(rotateArray[ind]<=rotateArray[tail]){  // 在第二个递增数组，移动tail指针
+                tail = ind;
+            }
+            ind = (head+tail)/2;
+        }
+        return rotateArray[ind];
     }
 };
