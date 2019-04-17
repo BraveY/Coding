@@ -3,8 +3,10 @@
 
 #include "pch.h"
 #include <iostream>
+#include <vector>
+using namespace std;
 
-class Solution {
+class ReSolution {
 public:
 	void replaceSpace(char *str, int length) {
 		if (str == NULL || length <= 0) exit(1);
@@ -39,11 +41,25 @@ public:
 		delete tmp_str;
 	}
 };
+class Solution {
+public:
+	int Fibonacci(int n) {
+		vector<int> array;
+		for (int i = 0; i <= n; i++) {
+			if (i == 0) array.push_back(0);
+			else if (i == 1) array.push_back(1);
+			else array.push_back( array[i - 1] + array[i - 2]);
+		}
+		return array[n];
+	}
+};
 int main()
 {
-	char str[] = "hello world";
+	//char str[] = "hello world";
 	Solution sol;
-	sol.replaceSpace(str, strlen(str));
+	//sol.replaceSpace(str, strlen(str));
+	int rtn = sol.Fibonacci(3);
+	std::cout << rtn << std::endl;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

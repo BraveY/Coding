@@ -4,7 +4,7 @@ https://www.nowcoder.com/practice/9f3231a991af4f55b95579b44b7a01ba?tpId=13&tqId=
 class Solution {
 public:
     int minNumberInRotateArray(vector<int> rotateArray) {
-        /*if(rotateArray.empty()) return 0;
+        /*if(rotateArray.empty()) return 0;  // 顺序查找 O(N)
         int len = rotateArray.size();
         if(len==1) return rotateArray[0];
         int rotate_index = 0;
@@ -27,6 +27,9 @@ public:
                 ind = tail;
                 break;
             }
+            if(rotateArray[head]==rotateArray[tail] && rotateArray[ind]==rotateArray[head]) {
+                return MinInOrder(rotateArray, head, tail);   // 首尾中间值相等，只能顺序查找
+            }
             if(rotateArray[ind]>= rotateArray[head]) { //在第一个递增数组，移动head指针
                 head = ind;  
             }
@@ -36,5 +39,12 @@ public:
             ind = (head+tail)/2;
         }
         return rotateArray[ind];
+    }
+    int MinInOrder(vector<int> array, int index1, int index2){
+        int result = array[index1];
+        for(int i=index1+1; i<=index2; i++){
+            if(result > array[i]) result = array[i];
+        }
+        return result;
     }
 };
