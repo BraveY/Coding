@@ -2,9 +2,16 @@
 class Solution {
 public:
      int  NumberOf1(int n) {
+         /* 常规解法
          int count = 0;
          for(int i=0; i<sizeof(int)*8;i++){
              if((n>>i)&1) count++;
+         }
+         return count;*/
+         int count=0;
+         while(n){
+             count++;
+             n = (n-1)&n;
          }
          return count;
      }
