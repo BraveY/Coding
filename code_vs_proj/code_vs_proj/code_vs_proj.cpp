@@ -41,7 +41,7 @@ public:
 		delete tmp_str;
 	}
 };
-class Solution {
+class FSolution {
 public:
 	int Fibonacci(int n) {
 		vector<int> array;
@@ -53,13 +53,56 @@ public:
 		return array[n];
 	}
 };
+
+class Solution {
+public:
+	void reOrderArray(vector<int> &array) {
+		int len = array.size();
+		int odd = 0;
+		int even = len - 1;
+		int head = 0;
+		int tail = len - 1;
+		vector<int> tmp_array(len);
+		for (int i = 0; i < len; i++) {
+			if (array[head] % 2 == 1) {
+				tmp_array[odd] = array[head];
+				odd++;
+			}
+			if (array[tail] % 2 == 0) {
+				tmp_array[even] = array[tail];
+				even--;
+			}
+			head++;
+			tail--;
+		}
+		for (int i = 0; i < len; i++) {
+			std::cout << i << "is " << tmp_array[i] << std::endl;
+			array[i] = tmp_array[i];
+		}
+	}
+
+	/*    void swap(vector<int> &array, int ind_f, int ind_b){
+			int tmp = array[ind_f];
+			array[ind_f] = array[ind_b];
+			array[ind_b] = tmp ;
+		}*/
+};
 int main()
 {
 	//char str[] = "hello world";
 	Solution sol;
 	//sol.replaceSpace(str, strlen(str));
-	int rtn = sol.Fibonacci(3);
-	std::cout << rtn << std::endl;
+	// fib test
+	//int rtn = sol.Fibonacci(3);
+	//std::cout << rtn << std::endl;
+
+	/* reorder test*/
+	/*vector<int> in_array;
+	for(int i = 1; i <= 7; i++) {
+		in_array.push_back(i);
+	}
+	sol.reOrderArray(in_array);*/
+	
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

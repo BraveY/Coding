@@ -1,2 +1,3 @@
 ﻿  code_vs_proj.cpp
+c:\users\bravey\documents\bravey\coding\code_vs_proj\code_vs_proj\code_vs_proj.cpp(60): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
   code_vs_proj.vcxproj -> C:\Users\BraveY\Documents\BraveY\Coding\code_vs_proj\x64\Debug\code_vs_proj.exe
