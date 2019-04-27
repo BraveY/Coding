@@ -105,7 +105,7 @@ struct ListNode {
 			val(x), next(NULL) {
 	}
 };
-class Solution {
+class MergeSolution {
 public:
 	ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
 	{
@@ -123,6 +123,46 @@ public:
 		return merge_head;
 	}
 };
+
+
+struct TreeNode {
+	int val;
+	struct TreeNode *left;
+	struct TreeNode *right;
+	TreeNode(int x) :
+			val(x), left(NULL), right(NULL) {
+	}
+};
+
+class Solution {
+public:
+	bool HasSubtree(TreeNode* pRoot1, TreeNode* pRoot2)
+	{
+		bool has_flag = false;
+		if (pRoot1 == nullptr || pRoot2 == nullptr) return has_flag;
+		bool sub_flag = false;
+		if (pRoot1->val == pRoot2->val) {
+			sub_flag = sub_tree_find(pRoot1, pRoot2);
+		}
+		if (!sub_flag) {
+			sub_flag = HasSubtree(pRoot1->left, pRoot2) ||  HasSubtree(pRoot1->right, pRoot2); // 不应该用&&，只要有一个为真就是有子节点的
+		}
+		if (sub_flag == true) has_flag = true;
+		return has_flag;
+	}
+
+	bool sub_tree_find(TreeNode *pRoot1, TreeNode *pRoot2) {
+		bool sub_tree = false;
+		if (pRoot2 == nullptr) return true;
+		if (pRoot1 == nullptr) return false;
+		
+		if (pRoot1->val == pRoot2->val) {
+			sub_tree = sub_tree_find(pRoot1->left, pRoot2->left) && sub_tree_find(pRoot1->right, pRoot2->right);
+		}
+		return sub_tree;
+	}
+};
+
 int main()
 {
 	//char str[] = "hello world";
