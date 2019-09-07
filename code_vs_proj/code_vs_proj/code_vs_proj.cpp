@@ -166,7 +166,7 @@ public:
 int main()
 {
 	//char str[] = "hello world";
-	Solution sol;
+	//Solution sol;
 	//sol.replaceSpace(str, strlen(str));
 	// fib test
 	//int rtn = sol.Fibonacci(3);
@@ -178,7 +178,12 @@ int main()
 		in_array.push_back(i);
 	}
 	sol.reOrderArray(in_array);*/
-	
+	double x;
+	while (1) {
+		x = 567829301392 / 452341;
+		x / = x;
+	}
+	return 0;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\code_vs_proj"
   ],
-  "SelectedNode": "\\code_vs_proj.sln",
+  "SelectedNode": "\\code_vs_proj\\code_vs_proj.cpp",
   "PreviewInSolutionExplorer": false
 }
