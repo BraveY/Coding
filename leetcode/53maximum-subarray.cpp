@@ -79,7 +79,7 @@ class Solution3 {
     int left = helper(nums, lo, mid);
     int left_max = nums[mid];
     int left_sum = 0;
-    for (int i = mid; i >= 0; i--) {
+    for (int i = mid; i >= lo; i--) {
       left_sum += nums[i];
       left_max = max(left_sum, left_max);
     }
