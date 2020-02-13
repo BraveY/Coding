@@ -52,8 +52,12 @@ class TLESolution {
  private:
 };
 
-/*https://zxi.mytechroad.com/blog/leetcode/leetcode-140-word-break-ii/*/
-//记忆化递归可以快速的判断无解的情况
+/*
+https://zxi.mytechroad.com/blog/leetcode/leetcode-140-word-break-ii/
+Runtime: 16 ms, faster than 69.32% of C++ online submissions for Word Break II.
+Memory Usage: 15.1 MB, less than 54.55% of C++ online submissions for Word Break
+II.
+ */
 class Solution {
  public:
   vector<string> wordBreak(string s, vector<string>& wordDict) {
@@ -64,37 +68,41 @@ class Solution {
  private:
   // >> append({"cats and", "cat sand"}, "dog");
   // {"cats and dog", "cat sand dog"}
-  vector<string> append(const vector<string>& prefixes, const string& word) {
-    vector<string> results;
-    for (const auto& prefix : prefixes) results.push_back(prefix + " " + word);
-    return results;
+  vector<string> append(const vector<string>& left, const string& right) {
+    vector<string> rtn;
+    //左边为空的时候，不会加上右边，返回的也是空
+    for (const auto& iter : left) rtn.push_back(iter + " " + right);
+    return rtn;
   }
 
-  const vector<string>& wordBreak(string s, unordered_set<string>& dict) {
-    // Already in memory, return directly
+  const vector<string> wordBreak(string s, unordered_set<string>& dict) {
     if (memo.count(s)) return memo[s];
+    int n = s.length();
+    // 空字符串的处理？空字符串默认为vector也为空，所以不用处理
 
-    // Answer for s
+    //记录答案
     vector<string> ans;
-
-    // s in dict, add it to the answer array
+    //如果完整字符串在字典里则直接加入到答案，
+    //之所以提出来写是因为wordBreak("")为空，因此直接加上right，
+    //不加上“ ”,不使用append函数
     if (dict.count(s)) ans.push_back(s);
-
-    for (int j = 1; j < s.length(); ++j) {
-      // Check whether right part is a word
-      const string& right = s.substr(j);
-      if (!dict.count(right)) continue;
-
-      // Get the ans for left part
-      const string& left = s.substr(0, j);
-      const vector<string> left_ans = append(wordBreak(left, dict), right);
-
-      // Notice, can not use memo here,
-      // since we haven't got the ans for s yet.
-      ans.insert(ans.end(), left_ans.begin(), left_ans.end());
+    //不从0开始分割，为0的情况在上面if语句中已经判断过了
+    for (int i = 1; i < n; i++) {
+      const string& right = s.substr(i);
+      //先判断右边是否在字典中，这也是记忆化递归能比动态规划快的原因，
+      //不会先去求解，从而造成TLE，而是先判断是否需要求解
+      if (dict.count(right)) {
+        const string& left = s.substr(0, i);
+        const vector<string> left_ans =
+            append(wordBreak(left, dict), right);  //左边的结果加上新的末尾
+        //不能使用
+        // memo[s]来填充,因为还没算完,只是其中一种解。所以后续的递归如果访问了memo[s]，结果是不一致的
+        // memo[s].swap(
+        //     append(left_ans, right));
+        ans.insert(ans.end(), left_ans.begin(),
+                   left_ans.end());  //将left_ans的答案添加到ans
+      }
     }
-
-    // memorize and return
     memo[s].swap(ans);
     return memo[s];
   }
