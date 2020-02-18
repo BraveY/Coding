@@ -9,6 +9,11 @@
 
 using namespace std;
 
+/*
+Runtime: 336 ms, faster than 12.50% of C++ online submissions for Longest
+Palindromic Substring. Memory Usage: 26.5 MB, less than 20.69% of C++ online
+submissions for Longest Palindromic Substring.
+ */
 class Solution {
  public:
   //只用一维opt[i]来表示不可行，因为与前一个字符形成的回文的可能是所有状态的。比如回文是1到i-1
@@ -36,10 +41,38 @@ class Solution {
  private:
 };
 
+// Author: Huahua, 16 ms, 8.7 MB
+class Solution2 {
+ public:
+  string longestPalindrome(string s) {
+    const int n = s.length();
+    auto getLen = [&](int l, int r) {  // 计算每个字符可扩展到的长度
+      while (l >= 0 && r < n && s[l] == s[r]) {
+        --l;
+        ++r;
+      }
+      return r - l - 1;
+    };
+    int len = 0;
+    int start = 0;
+    for (int i = 0; i < n; ++i) {
+      //(i,i)以自身为起点 （i，i+1）以中间为起点
+      int cur = max(getLen(i, i), getLen(i, i + 1));
+      if (cur > len) {
+        len = cur;
+        start = i - (len - 1) / 2;
+      }
+    }
+    return s.substr(start, len);
+  }
+
+ private:
+};
+
 int main(int argc, char const *argv[]) {
   /* code */
   ios::sync_with_stdio(false);
-  Solution sol;
+  Solution2 sol;
   cout << sol.longestPalindrome("babad") << endl;
   system("pause");
   return 0;
