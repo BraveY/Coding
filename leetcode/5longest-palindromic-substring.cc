@@ -42,6 +42,11 @@ class Solution {
 };
 
 // Author: Huahua, 16 ms, 8.7 MB
+/*
+Runtime: 16 ms, faster than 86.12% of C++ online submissions for Longest
+Palindromic Substring. Memory Usage: 8.8 MB, less than 78.62% of C++ online
+submissions for Longest Palindromic Substring.
+ */
 class Solution2 {
  public:
   string longestPalindrome(string s) {
@@ -68,11 +73,64 @@ class Solution2 {
 
  private:
 };
+/*
+马拉车
+Runtime: 24 ms, faster than 70.00% of C++ online submissions for Longest
+Palindromic Substring. Memory Usage: 141.8 MB, less than 8.96% of C++ online
+submissions for Longest Palindromic Substring.
+ */
+class Solution3 {
+ public:
+  string longestPalindrome(string s) {
+    string T = padding(s);
+    int n = T.length();
+    std::vector<int> P(n);
+    int C = 0, R = 0;
+    for (int i = 1; i < n - 1; i++) {  //原字符串的开始长度1和n-2
+      int i_mirror = 2 * C - i;
+      if (R > i) {
+        P[i] = min(R - i, P[i_mirror]);  //防止超出R
+      } else {
+        P[i] = 0;
+      }
+      //中心扩展法都要使用
+      while (T.at(i + 1 + P[i]) == T.at(i - 1 - P[i])) {
+        P[i]++;
+      }
+      if (i + P[i] > R) {
+        C = i;
+        R = i + P[i];
+      }
+    }
+    int max_len = 0;
+    int center = 0;
+    for (int i = 1; i < n - 1; i++) {
+      if (P[i] > max_len) {
+        max_len = P[i];
+        center = i;
+      }
+    }
+    int start = (center - max_len) / 2;  //原始字符串下标
+    return s.substr(start, max_len);
+  }
+
+ private:
+  string padding(string& s) {
+    int n = s.length();
+    if (n == 0) return "^$";
+    string rtn = "^";
+    for (int i = 0; i < n; i++) {
+      rtn = rtn+"#" + s.at(i); //不能使用+= 
+    }
+    rtn += "#$";
+    return rtn;
+  }
+};
 
 int main(int argc, char const *argv[]) {
   /* code */
   ios::sync_with_stdio(false);
-  Solution2 sol;
+  Solution3 sol;
   cout << sol.longestPalindrome("babad") << endl;
   system("pause");
   return 0;
