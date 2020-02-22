@@ -19,11 +19,21 @@ using namespace std;
  * };
  */
 /*
-Runtime: 16 ms, faster than 25.90% of C++ online submissions for Maximum Depth
-of Binary Tree. Memory Usage: 19.6 MB, less than 50.55% of C++ online
+RRuntime: 12 ms, faster than 61.17% of C++ online submissions for Maximum Depth
+of Binary Tree. Memory Usage: 19.6 MB, less than 52.75% of C++ online
 submissions for Maximum Depth of Binary Tree.
  */
 class Solution {
+ public:
+  int maxDepth(TreeNode* root) {
+    if (!root) return 0;
+    int left_depth = maxDepth(root->left);
+    int right_depth = maxDepth(root->right);
+    return max(left_depth, right_depth) + 1;
+  }
+};
+
+class Solution2 {
  public:
   int maxDepth(TreeNode* root) {
     if (!root) return 0;
