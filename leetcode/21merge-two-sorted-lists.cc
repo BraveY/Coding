@@ -26,10 +26,8 @@ struct ListNode {
 
 class Solution {
  public:
-  ListNode* mergeTwoLists(
-      ListNode* l1,
-      ListNode*
-          l2) {  //返回的是指针，因此要么用原来存在的节点地址，要么用new来创建节点。
+  ListNode* mergeTwoLists(ListNode* l1, ListNode*l2) {
+    //返回的是指针，因此要么用原来存在的节点地址，要么用new来创建节点。
     ListNode dummy(0);
     ListNode* tail = &dummy;
     while (l1 && l2) {
