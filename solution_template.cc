@@ -10,17 +10,17 @@
 using namespace std;
 
 class Solution {
- public:
-  int solution() {}
+  public:
+	int solution() {}
 
- private:
+  private:
 };
 
 int main(int argc, char const *argv[]) {
-  /* code */
-  ios::sync_with_stdio(false);
-  Solution sol;
-  cout << sol.solution() << endl;
-  system("pause");
-  return 0;
+	/* code */
+	ios::sync_with_stdio(false);
+	Solution sol;
+	cout << sol.solution() << endl;
+	system("pause");
+	return 0;
 }
