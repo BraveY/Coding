@@ -80,9 +80,11 @@ class Solution2 {
 					return (max(maxLeftB, maxLeftA) + min(minRightB, minRightA)) * 0.5;
 				}
 			}
-			if (nums1[m1] < nums2[m2 - 1])
+			if (nums1[m1] < nums2[m2 - 1])\
+				// 第一个数组的元素过少 所以往右边移动
 				l = m1 + 1;
 			else
+				// 过多所以往左边移动
 				r = m1 - 1;
 		}
 		return 0.0;
