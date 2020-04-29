@@ -16,18 +16,24 @@ class Solution {
  private:
 };
 
-int main(int argc, char const *argv[]) {
-	/* code */
-	ios::sync_with_stdio(false);
-	Solution sol;
-	vector<int> nums1 = {1, 2, 3, 0, 0, 0};
-	// vector<int> nums2 = {2, 5, 6};
-	sol.merge(nums1, nums2);
-	for (auto i : nums1) {
+void cout_vector(vector<int>& nums) {
+	for (auto i : nums) {
 		cout << i << ' ';
 	}
 	cout << endl;
+}
+
+void debug() {
+	Solution sol;
+	vector<int> nums1 = {1, 2, 3, 0, 0, 0};
 	cout << sol.solution() << endl;
+	return;
+}
+
+int main(int argc, char const *argv[]) {
+	/* code */
+	ios::sync_with_stdio(false);
+	debug();
 	system("pause");
 	return 0;
 }
