@@ -10,10 +10,10 @@
 using namespace std;
 
 class Solution {
- public:
+  public:
 	int solution() {}
 
- private:
+  private:
 };
 
 void cout_vector(vector<int>& nums) {
@@ -25,8 +25,27 @@ void cout_vector(vector<int>& nums) {
 
 void debug() {
 	Solution sol;
-	vector<int> nums1 = {1, 2, 3, 0, 0, 0};
-	cout << sol.solution() << endl;
+
+	//一维数组的输入
+	// vector<int> nums1 = {1, 2, 3, 0, 0, 0};
+	// vector<int> nums2;
+	// int i;
+	// while (cin >> i) {
+	// 	nums2.push_back(i);
+	// }
+	// cout << sol.solution() << endl;
+
+	//二维数组的输入
+	// while (cin >> m >> n) {
+	// 	vector<vector<char>> grid(m, vector<char>(n));
+	// 	for (int i = 0; i < m; i++) {
+	// 		for (int j = 0; j < n; j++ ) {
+	// 			cin >> grid[i][j];
+	// 		}
+	// 	}
+	// 	int ans = sol.solution(grid);
+	// 	cout << ans << endl;
+	// }
 	return;
 }
 
