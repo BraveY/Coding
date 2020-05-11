@@ -1,3 +1,13 @@
+#include <limits.h>
+#include <stdio.h>
+#include <algorithm>
+#include <iostream>
+#include <map>
+#include <string>
+#include <utility>
+#include <vector>
+using namespace std;
+
 /*
 leetcode 881
 https://leetcode.com/problems/boats-to-save-people/
@@ -7,7 +17,7 @@ class Solution {
   /* 桶排序 贪心的选择最胖的先走
   Runtime: 96 ms
   Memory Usage: 16.5 MB
-int numRescueBoats(vector<int>& people, int limit) {
+  int numRescueBoats(vector<int>& people, int limit) {
   int num = people.size();
           if(num<=0) return 0;
   vector<int> person(limit+1, 0);
@@ -26,7 +36,7 @@ int numRescueBoats(vector<int>& people, int limit) {
                                   if(person[k]>0){
                                           person[k]--;
                                           if(k==i) j--; //
-如果减去的和当前指向的weight一样 则需要减去自身
+  如果减去的和当前指向的weight一样 则需要减去自身
                                           // crossed++;
                                           break;
                                   }
@@ -35,7 +45,7 @@ int numRescueBoats(vector<int>& people, int limit) {
           }
           // if(crossed==num) cout<<"all crossed" <<endl;
           return ans;
-}*/
+  }*/
   /*排序后 双指针
       Runtime: 116 ms
       Memory Usage: 13.6 MB
