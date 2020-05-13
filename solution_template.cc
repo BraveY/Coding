@@ -36,6 +36,7 @@ void debug() {
 	// cout << sol.solution() << endl;
 
 	//二维数组的输入
+	//int m, n;
 	// while (cin >> m >> n) {
 	// 	vector<vector<char>> grid(m, vector<char>(n));
 	// 	for (int i = 0; i < m; i++) {

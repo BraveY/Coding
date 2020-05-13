@@ -11,29 +11,6 @@ using namespace std;
 
 class Solution {
  public:
-	// static bool compare(int a, int b) {
-	// 	if (a == b) return false;
-	// 	string nums1 = to_string(a);
-	// 	string nums2 = to_string(b);
-	// 	int len1 = nums1.size();
-	// 	int len2 = nums2.size();
-	// 	int i = 0;
-	// 	int j = 0;
-	// 	bool rtn = false;
-	// 	while (i < len1 && j < len2) {
-	// 		if (nums1[i] != nums2[j]) {
-	// 			break;
-	// 		} else {
-	// 			i++;
-	// 			j++;
-	// 		}
-	// 	}
-	// 	if (i >= len1) i = 0;
-	// 	if (j >= len2) j = 0;
-	// 	if (nums1[i] == nums2[j]) return a < b;
-	// 	rtn = nums1[i] > nums2[j];
-	// 	return rtn;
-	// }
 	static bool compare(int a, int b) {
 		if (a == b) return false;
 		string nums1 = to_string(a) + to_string(b);
