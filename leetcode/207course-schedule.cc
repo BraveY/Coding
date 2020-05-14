@@ -25,6 +25,8 @@ class Solution2 {
 		}
 		// 0 :unk, 1 :visiting, 2 :visited
 		vector<int> v(numCourses, 0);
+		// 对每个节点都进行了dfs遍历，因为存在多张图，有独立的
+		// 不过有记忆化递归
 		for (int i = 0; i < numCourses; i++) {
 			if (dfs(i, v)) return false;
 		}
@@ -58,21 +60,17 @@ class Solution {
 		vector<int> degree(numCourses, 0);
 		for (int i = 0; i < n; i++) {
 			graph_[prerequisites[i][0]].push_back(prerequisites[i][1]);
-			degree[prerequisites[i][1]]++; // in degree
+			degree[prerequisites[i][1]]++; // in degree 入度表示需要先修的课的门数
 		}
-		// for (auto &p : pre) {
-		// 	graph_[p.second].push_back(p.first);
-		// 	degree[p.first]++;
-		// }
 		queue<int> q;
 		for (int i = 0; i < numCourses; i++)
-			if (degree[i] == 0) q.push(i);
+			if (degree[i] == 0) q.push(i); //先从不需要先修课的开始遍历
 		while (!q.empty()) {
-			int curr = q.front(); q.pop(); numCourses--;
+			int curr = q.front(); q.pop(); numCourses--;//将待遍历的节点减1
 			for (auto next : graph_[curr])
-				if (--degree[next] == 0) q.push(next);
+				if (--degree[next] == 0) q.push(next);//邻居节点的入度减1
 		}
-		return numCourses == 0;
+		return numCourses == 0; // 有环的节点入度始终大于0，不会经过while循环，使得待遍历的数大于1.
 	}
 };
 void cout_vector(vector<int>& nums) {
