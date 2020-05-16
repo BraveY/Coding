@@ -25,53 +25,38 @@ struct TreeNode {
 
 /*
 BFS used two vectors
-Runtime: 0 ms, faster than 100.00% of C++ online submissions for Binary Tree Level Order Traversal.
-Memory Usage: 12.4 MB, less than 100.00% of C++ online submissions for Binary Tree Level Order Traversal
- */
-class Solution1 {
- public:
-	vector<vector<int>> levelOrder(TreeNode* root) {
-		if (!root) return {};
-		vector<vector<int>> ans;
-		vector<TreeNode*> cur, next;
-		cur.push_back(root);
-		while (!cur.empty()) {
-			ans.push_back({}); //直接用{}，就可以了，自动初试为空vector
-			for (auto node : cur) {
-				ans.back().push_back(node->val);//back()返回vector的最后一个元素，二维数组末尾的插入
-				if (node->left) next.push_back(node->left);
-				if (node->right) next.push_back(node->right);
-			}
-			swap(cur, next);
-			next.clear();
-		}
-		return ans;
-	}
-};
-
-/*
-DFS
-Runtime: 4 ms, faster than 94.10% of C++ online submissions for Binary Tree Level Order Traversal.
-Memory Usage: 13.8 MB, less than 90.14% of C++ online submissions for Binary Tree Level Order Traversal.
+Runtime: 4 ms, faster than 82.39% of C++ online submissions for Binary Tree Zigzag Level Order Traversal.
+Memory Usage: 11.9 MB, less than 100.00% of C++ online submissions for Binary Tree Zigzag Level Order Traversal.
  */
 class Solution {
  public:
-	vector<vector<int>> levelOrder(TreeNode* root) {
+	vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
 		if (!root) return {};
-		ans.push_back({});
-		DFS(root, 0);
-		return ans;
-	}
- private:
-	vector<vector<int>> ans;
-	void DFS(TreeNode* node, int depth) {
-		if (!node) return;
-		while (ans.size() <= depth ) {
-			ans.back().push_back({});
+		int flag = 0;
+		vector<TreeNode*> cur, next;
+		vector<vector<int>> ans;
+		cur.push_back(root);
+		while (!cur.empty()) {
+			ans.push_back({});
+			for (TreeNode* node : cur) {
+				if (node->left) next.push_back(node->left);
+				if (node->right) next.push_back(node->right);
+			}
+			if (flag) { // right to left
+				int len = cur.size();
+				while (len--) {
+					ans.back().push_back(cur[len]->val);
+				}
+			} else {
+				for (TreeNode* node : cur) {
+					ans.back().push_back(node->val);
+				}
+			}
+			swap(cur, next);
+			flag = !flag;
+			next.clear();
 		}
-		ans[depth].push_back(node->val);
-		DFS(node->left, depth + 1);
-		DFS(node->right, depth + 1);
+		return ans;
 	}
 };
 
