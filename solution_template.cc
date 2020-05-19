@@ -33,7 +33,7 @@ void debug() {
 	// while (cin >> i) {
 	// 	nums2.push_back(i);
 	// }
-	// cout << sol.solution() << endl;
+	// cout << sol.solution(nums2) << endl;
 
 	//二维数组的输入
 	//int m, n;
