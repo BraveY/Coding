@@ -38,7 +38,7 @@ void debug() {
 	//二维数组的输入
 	//int m, n;
 	// while (cin >> m >> n) {
-	// 	vector<vector<char>> grid(m, vector<char>(n));
+	// 	vector<vector<int>> grid(m, vector<int>(n));
 	// 	for (int i = 0; i < m; i++) {
 	// 		for (int j = 0; j < n; j++ ) {
 	// 			cin >> grid[i][j];
