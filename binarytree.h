@@ -77,3 +77,14 @@ string boolToString(bool input) {
 	return input ? "True" : "False";
 }
 
+// void Treedebug() {
+// 	string line;
+// 	while (getline(cin, line)) {
+// 		TreeNode* root = stringToTreeNode(line);
+
+// 		bool ret = Solution().isSymmetric(root);
+
+// 		string out = boolToString(ret);
+// 		cout << out << endl;
+// 	}
+// }
