@@ -11,7 +11,11 @@
 
 using namespace std;
 
-class Solution {
+/*
+Runtime: 2760 ms, faster than 5.03% of C++ online submissions for 3Sum.
+Memory Usage: 23.1 MB, less than 37.51% of C++ online submissions for 3Sum.
+ */
+class Solution1 {
   public:
 	vector<vector<int>> threeSum(vector<int>& nums) {
 		vector<vector<int>> ans;
@@ -50,6 +54,63 @@ class Solution {
   private:
 };
 
+
+class Solution {
+  public:
+	vector<vector<int>> threeSum(vector<int>& nums) {
+		vector<vector<int>> ans;
+		sort(nums.begin(), nums.end());
+		int n = nums.size();
+		for (int i = 0; i < n - 2; ++i) {
+			if (nums[i] > 0) break; // 排序后后面的都是正数。
+			if (i > 0 && nums[i] == nums[i - 1]) continue;
+			int l = i + 1;
+			int r = n - 1;
+			while (l < r) {
+				if (nums[i] + nums[l] + nums[r] == 0) {
+					ans.push_back({nums[i], nums[l++], nums[r++]});
+					while ( l < r && nums[l] == nums[l - 1]) ++l;
+					while ( l < r && r + 1 < n && nums[r] == nums[r + 1]) --r;
+				} else if ( nums[i] + nums[l] + nums[r] < 0) ++l;
+				else --r;
+			}
+		}
+		return ans;
+	}
+
+  private:
+};
+
+/*
+Runtime: 84 ms, faster than 88.28% of C++ online submissions for 3Sum.
+Memory Usage: 19.8 MB, less than 67.87% of C++ online submissions for 3Sum.
+ */
+class Solution {
+  public:
+	vector<vector<int>> threeSum(vector<int>& nums) {
+		vector<vector<int>> ans;
+		std::sort(nums.begin(), nums.end());
+		const int n = nums.size();
+		for (int i = 0; i < n - 2; ++i) {
+			if (nums[i] > 0) break;
+			if (i > 0 && nums[i] == nums[i - 1]) continue;
+			int l = i + 1;
+			int r = n - 1;
+			while (l < r) {
+				if (nums[i] + nums[l] + nums[r] == 0) {
+					ans.push_back({nums[i], nums[l++], nums[r--]});
+					while (l < r && nums[l] == nums[l - 1]) ++l;
+					while (l < r && nums[r] == nums[r + 1]) --r;
+				} else if (nums[i] + nums[l] + nums[r] < 0) {
+					++l;
+				} else {
+					--r;
+				}
+			}
+		}
+		return ans;
+	}
+};
 void cout_vector(vector<int>& nums) {
 	for (auto i : nums) {
 		cout << i << ' ';
@@ -61,7 +122,7 @@ void debug() {
 	Solution sol;
 
 	//一维数组的输入
-	vector<int> nums = { -4, -2, -2, -2, 0, 1, 2, 2, 2, 3, 3, 4, 4, 6, 6};
+	vector<int> nums = { -1, 0, 1, 2, -1, -4};
 	// vector<int> nums2;
 	// int i;
 	// while (cin >> i) {
