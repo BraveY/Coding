@@ -6,17 +6,71 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
-class Solution {
+/*
+Runtime: 20 ms, faster than 69.33% of C++ online submissions for Longest Consecutive Sequence.
+Memory Usage: 11 MB, less than 47.11% of C++ online submissions for Longest Consecutive Sequence.
+ */
+class Solution1 {
   public:
 	int longestConsecutive(vector<int>& nums) {
+		unordered_map<int, int> h;
+		for (int num : nums) {
+			if (h.count(num)) continue;
 
+			auto itL = h.find(num - 1);
+			auto itR = h.find(num + 1);
+			int l = itL != h.end() ? itL->second : 0;
+			int r = itR != h.end() ? itR->second : 0;
+			if (l > 0 && r > 0) {
+				h[num] = h[num - l] = h[num + r] = l + r + 1; // bridge case
+			} else if (l > 0) {
+				h[num] = h[num - l] = l + 1;	// one neighbor
+			} else if (r > 0) {
+				h[num] = h[num + r] = r + 1;	//one neighbor
+			} else {
+				h[num] = 1; // no neighbor
+			}
+		}
+
+		int ans = 0;
+		for (const auto& kv : h) {
+			ans = max(ans, kv.second);
+		}
+		return ans;
 	}
 
   private:
 };
+
+
+/*
+Runtime: 20 ms, faster than 69.33% of C++ online submissions for Longest Consecutive Sequence.
+Memory Usage: 10.8 MB, less than 86.92% of C++ online submissions for Longest Consecutive Sequence.
+ */
+class Solution {
+  public:
+	int longestConsecutive(vector<int>& nums) {
+		unordered_set<int> h(nums.begin(), nums.end());
+		int ans = 0;
+		for (long num : nums) {
+			if (!h.count(num - 1)) {
+				int l = 0;
+				while (h.count(num++)) ++l;
+				ans = max(ans, l);
+			}
+
+		}
+		return ans;
+	}
+
+  private:
+};
+
 
 void cout_vector(vector<int>& nums) {
 	for (auto i : nums) {
