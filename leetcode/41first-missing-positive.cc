@@ -46,7 +46,6 @@ class Solution1 {
 /*
 Runtime: 4 ms, faster than 83.55% of C++ online submissions for First Missing Positive.
 Memory Usage: 9.8 MB, less than 59.20% of C++ online submissions for First Missing Positive.
-Next challenges:
  */
 class Solution {
   public:
