@@ -25,7 +25,7 @@ class Solution {
         });
         vector<vector<int>> rtn;
         for(auto person : people){
-            rtn.insert(rtn.begin() + person[1], person); // 在index 前插入 person元素。
+            rtn.insert(rtn.begin() + person[1], person); // 在index 前插入 person元素
         }
         return rtn;
     }
