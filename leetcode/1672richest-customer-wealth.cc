@@ -6,27 +6,23 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <numeric>
 
 using namespace std;
+
 /*
-Runtime: 100 ms, faster than 86.51% of C++ online submissions for Task Scheduler.
-Memory Usage: 34.7 MB, less than 92.77% of C++ online submissions for Task Scheduler.
-https://www.bilibili.com/video/BV1Wt411Y7Y9?from=search&seid=8874314878795560030
-最大频率有多个的情况
-ans = max(task_size, (k-1)*(n+1) + p )
-k is the max count, p tasks has the max count.
+Runtime: 12 ms, faster than 100.00% of C++ online submissions for Richest Customer Wealth.
+Memory Usage: 8.1 MB, less than 50.00% of C++ online submissions for Richest Customer Wealth.
 */
 class Solution {
   public:
-    int leastInterval(vector<char>& tasks, int n) {
-        vector<int> count(26, 0);
-        for (const char task : tasks)
-            ++count[task - 'A'];
-        int max_count = *max_element(count.begin(), count.end());
-        size_t ans = (max_count - 1) * (n + 1);
-        ans += count_if(count.begin(), count.end(),
-                        [max_count](int c){return c == max_count;});
-        return max(tasks.size(), ans);                        
+    int maximumWealth(vector<vector<int>>& accounts) {
+        int m = accounts.size();
+		int ans = -1;
+		for(int i = 0; i < m; ++i){
+			ans = max(ans, accumulate(accounts[i].begin(), accounts[i].end(), 0));
+		}
+		return ans;
     }
 
   private:
