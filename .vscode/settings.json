@@ -4,6 +4,8 @@
         "xstring": "cpp",
         "iostream": "cpp",
         "algorithm": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "limits": "cpp",
+        "random": "cpp"
     }
 }
