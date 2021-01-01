@@ -6,35 +6,49 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <stack>
 #include <numeric>
 #include "../binarytree.h"
 
 using namespace std;
 
 /*
-Runtime: 12 ms, faster than 84.95% of C++ online submissions for Path Sum.
-Memory Usage: 21.7 MB, less than 43.21% of C++ online submissions for Path Sum.
+Runtime: 4 ms, faster than 99.07% of C++ online submissions for Path Sum II.
+Memory Usage: 21.9 MB, less than 47.06% of C++ online submissions for Path Sum II.
 */
 class Solution {
   public:
-    bool hasPathSum(TreeNode* root, int sum) {
+    vector<vector<int>> pathSum(TreeNode* root, int sum) {
         expect = sum;
         DFS(root, 0);
-        return flag;
+        return ans;
     }
 
+
   private:
-    void DFS(TreeNode* root, int sum){
-        if(!root) return ;
-        sum += root->val;
-        if(!root->left && !root->right && sum == expect){
-            flag = true;
-        }        
-		DFS(root->left, sum);
-		DFS(root->right, sum);
-    }
-    bool flag = false;
+    stack<int> path;
+    vector<vector<int>> ans;
     int expect = 0;
+
+    void DFS(TreeNode* root, int sum){
+        if(!root) return;
+        path.push(root->val);
+        sum += root->val;
+        if(!root->left && !root->right && sum == expect) {
+            insert2ans(path);
+        }        
+        DFS(root->left, sum);
+        DFS(root->right, sum);
+        path.pop();
+    }
+    void insert2ans(stack<int> path){
+        vector<int> tmp(path.size());
+        for(int i = path.size() - 1; i >= 0; i--) {
+            tmp[i] = path.top();
+            path.pop();
+        }
+        ans.push_back(tmp);
+    }
 };
 
 void cout_vector(vector<int>& nums) {

@@ -12,29 +12,44 @@
 using namespace std;
 
 /*
-Runtime: 12 ms, faster than 84.95% of C++ online submissions for Path Sum.
-Memory Usage: 21.7 MB, less than 43.21% of C++ online submissions for Path Sum.
+Runtime: 24 ms, faster than 68.54% of C++ online submissions for Path Sum III.
+Memory Usage: 16.7 MB, less than 54.51% of C++ online submissions for Path Sum III.
+不要再DFS里面再次DFS，这样会重复很多次，递归的逻辑比较复杂。
 */
 class Solution {
   public:
-    bool hasPathSum(TreeNode* root, int sum) {
+    int pathSum(TreeNode* root, int sum) {
         expect = sum;
-        DFS(root, 0);
-        return flag;
+        DFS_v(root, 0);
+        for(int i = 1; i < nodes.size(); i++) {
+            DFS(nodes[i], 0);
+        }
+        return ans;
     }
 
   private:
-    void DFS(TreeNode* root, int sum){
-        if(!root) return ;
+    void DFS_v(TreeNode* root, int sum){
+        if(!root) return;
+        nodes.push_back(root);
         sum += root->val;
-        if(!root->left && !root->right && sum == expect){
-            flag = true;
+        if(sum == expect){
+            ans++;            
         }        
-		DFS(root->left, sum);
-		DFS(root->right, sum);
+        DFS_v(root->left, sum);
+        DFS_v(root->right, sum);
     }
-    bool flag = false;
+    void DFS(TreeNode* root, int sum){
+        if(!root) return;
+        sum += root->val;
+        if(sum == expect){
+            ans++;            
+        }        
+        DFS(root->left, sum);
+        DFS(root->right, sum);
+    }    
+    int ans = 0;
     int expect = 0;
+    vector<TreeNode*> nodes;
 };
 
 void cout_vector(vector<int>& nums) {
@@ -69,6 +84,10 @@ void debug() {
 	// 	cout << ans << endl;
 	// }
 	// vector<vector<int>> grid{{1,3,1},{1,5,1},{4,2,1}};
+    string str = "[1,null,2,null,3,null,4,null,5]";
+    int sum = 3;
+    TreeNode* root = stringToTreeNode(str);
+    cout << sol.pathSum(root, sum) << endl;
 	return;
 }
 
