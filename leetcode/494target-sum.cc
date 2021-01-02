@@ -12,7 +12,9 @@ using namespace std;
 
 class Solution {
   public:
-	int solution() {}
+    int findTargetSumWays(vector<int>& nums, int S) {
+        
+    }
 
   private:
 };
