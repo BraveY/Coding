@@ -10,6 +10,12 @@
 
 using namespace std;
 
+void cout_vector(vector<int>& nums) {
+	for (auto i : nums) {
+		cout << i << ' ';
+	}
+	cout << endl;
+}
 class Solution {
   public:
 	int solution() {}
@@ -17,12 +23,6 @@ class Solution {
   private:
 };
 
-void cout_vector(vector<int>& nums) {
-	for (auto i : nums) {
-		cout << i << ' ';
-	}
-	cout << endl;
-}
 
 void debug() {
 	Solution sol;
@@ -49,6 +49,8 @@ void debug() {
 	// 	cout << ans << endl;
 	// }
 	// vector<vector<int>> grid{{1,3,1},{1,5,1},{4,2,1}};
+	//二叉树输入
+	//TreeNode* root = stringToTreeNode("[3,9,20,null,null,15,7]")
 	return;
 }
 

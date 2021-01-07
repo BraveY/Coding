@@ -6,14 +6,23 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <queue>
 
 using namespace std;
+
+
+void cout_vector(vector<int>& nums) {
+	for (auto i : nums) {
+		cout << i << ' ';
+	}
+	cout << endl;
+}
 
 /*
 Runtime: 236 ms, faster than 5.26% of C++ online submissions for Kth Largest Element in an Array.
 Memory Usage: 10.2 MB, less than 25.55% of C++ online submissions for Kth Largest Element in an Array.
  */
-class Solution {
+class Solution1 {
   public:
 	int findKthLargest(vector<int>& nums, int k) {
 		int n = nums.size();
@@ -43,12 +52,16 @@ class Solution {
 				swap(nums[loNow], nums[i]);
 			}
 		}
-		swap(nums[loNow + 1], [piv]);
+		swap(nums[loNow + 1], nums[piv]);
 		piv = loNow + 1;
 		return piv;
 	}
 };
 
+/*
+Runtime: 12 ms, faster than 94.93% of C++ online submissions for Kth Largest Element in an Array.
+Memory Usage: 10.3 MB, less than 93.45% of C++ online submissions for Kth Largest Element in an Array.
+*/
 class Solution2 {
   public:
 	int findKthLargest(vector<int>& nums, int k) {
@@ -58,24 +71,76 @@ class Solution2 {
 	}
 };
 
-void cout_vector(vector<int>& nums) {
-	for (auto i : nums) {
-		cout << i << ' ';
+/*
+Runtime: 20 ms, faster than 66.90% of C++ online submissions for Kth Largest Element in an Array.
+Memory Usage: 10.7 MB, less than 23.03% of C++ online submissions for Kth Largest Element in an Array.
+*/
+class Solution3 {
+  public:
+	int findKthLargest(vector<int>& nums, int k) {
+		priority_queue<int> pq(nums.begin(), nums.end());
+		for(int i = 0; i < k - 1; ++i) {
+			pq.pop();
+		}
+		return pq.top();
 	}
-	cout << endl;
-}
+};
+
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        buildMaxHeap(nums);
+        for (int i = 0; i < k - 1; i++) {
+            swap(nums[0], nums[--heapSize]);//堆顶换到最后，同时heapSize--表示换到后面的已被淘汰不再有机会上浮。
+            maxHeapify(nums, 0);
+        }
+        return nums[0];
+    }
+private:
+    int heapSize;
+    
+    int left(int i) {
+        return (i << 1) + 1; //左节点2*i + 1
+    }
+    
+    int right(int i) {
+        return (i << 1) + 2; //右节点2*i + 2
+    }
+    
+    void maxHeapify(vector<int>& nums, int i) {// 将输入的元素一直调整到满足最大堆的要求。
+        int largest = i, l = left(i), r = right(i);
+        if (l < heapSize && nums[l] > nums[largest]) {
+            largest = l;
+        }
+        if (r < heapSize && nums[r] > nums[largest]) {
+            largest = r;
+        }
+        if (largest != i) {
+            swap(nums[i], nums[largest]);
+            maxHeapify(nums, largest);
+        }
+    }
+    
+    void buildMaxHeap(vector<int>& nums) {
+        heapSize = nums.size();
+        for (int i = (heapSize >> 1) - 1; i >= 0; i--) {//只对前面一半的部分进行调整。就可以完整建立。
+            maxHeapify(nums, i);
+        }
+    }
+};
 
 void debug() {
 	Solution sol;
 
 	//一维数组的输入
-	vector<int> nums1 = {3, 2, 1, 5, 6, 4};
+	vector<int> nums1 = {6, 4, 5, 3, 2, 1};
 	// vector<int> nums2;
 	// int i;
 	// while (cin >> i) {
 	// 	nums2.push_back(i);
 	// }
 	cout << sol.findKthLargest(nums1, 2) << endl;
+	
 
 
 	//二维数组的输入
