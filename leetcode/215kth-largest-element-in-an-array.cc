@@ -86,7 +86,7 @@ class Solution3 {
 	}
 };
 
-class Solution {
+class Solution4 {
 public:
     int findKthLargest(vector<int>& nums, int k) {
         buildMaxHeap(nums);
@@ -129,17 +129,53 @@ private:
     }
 };
 
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int left = 0, right = nums.size() - 1, kth;
+        while (true) {
+            int idx = partition(nums, left, right);
+            if (idx == k - 1) {
+                kth = nums[idx];
+                break;
+            }
+            if (idx < k - 1) {
+                left = idx + 1; 
+            } else {
+                right = idx - 1;
+            }
+        }
+        return kth;
+    }
+private:
+    int partition(vector<int>& nums, int left, int right) {
+        int pivot = nums[left], l = left + 1, r = right;
+        while (l <= r) {
+            if (nums[l] <= pivot && nums[r] >= pivot) { // 必须先判断是否需要交换，放在后面会造成逻辑错误,区间判断可以加上等号
+                swap(nums[l], nums[r]);
+            }
+            if (nums[l] >= pivot) {
+                l++;
+            }
+            if (nums[r] <= pivot) {
+                r--;
+            }
+        }
+        swap(nums[left], nums[r]); //以左边为pivot则必须与right交换，反之以右边为pivot则必须交换left
+        return r;
+    }
+};
 void debug() {
 	Solution sol;
 
 	//一维数组的输入
-	vector<int> nums1 = {6, 4, 5, 3, 2, 1};
+	vector<int> nums1 = {99, 99};
 	// vector<int> nums2;
 	// int i;
 	// while (cin >> i) {
 	// 	nums2.push_back(i);
 	// }
-	cout << sol.findKthLargest(nums1, 2) << endl;
+	cout << sol.findKthLargest(nums1, 1) << endl;
 	
 
 
