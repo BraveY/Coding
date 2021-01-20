@@ -57,7 +57,7 @@ public:
 
 占用内存：504k
 */
-class Solution {
+class Solution3 {
 public:
     vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
         quickSort(input, 0, input.size() - 1);
@@ -67,15 +67,16 @@ public:
     }
 private:
     void quickSort(vector<int>& nums, int l, int r) {
-        if (l >= r)  return ;
-        int pivotIndex = getPivotIndex(nums, l, r);
+        if (l >= r) return ;
+        int pivotIndex = partition(nums, l, r);
         quickSort(nums, l, pivotIndex - 1); // 如果把pivot包含进去，左边依然会使用pivot来进行交换，造成无限递归，所以一定不能包含pivot
         quickSort(nums, pivotIndex + 1, r);
     }
-    int getPivotIndex(vector<int>& nums, int l, int r) {
+
+    int partition(vector<int>& nums, int l, int r) {
         int pivot = r;
-        r--;
-        while(l <= r) {
+        --r;
+        while (l <= r) {
             if (nums[l] >= nums[pivot] && nums[r] <= nums[pivot]) swap(nums[l], nums[r]);
             if (nums[l] <= nums[pivot]) ++l;
             if (nums[r] >= nums[pivot]) --r;
@@ -83,6 +84,60 @@ private:
         swap(nums[l], nums[pivot]);
         return l;
     }
+};
+
+/*
+运行时间：3ms
+
+占用内存：476k
+*/
+class Solution {
+public:
+    vector<int> GetLeastNumbers_Solution(vector<int> input, int k) {
+        dummy = vector<int> {input.begin(), input.end()};
+        mergeSort(input, 0, input.size() - 1);
+        if (!k || k > input.size()) return {};
+        vector<int> rtn {input.begin(), input.begin() + k};
+        return rtn;        
+    }
+private:
+    void mergeSort(vector<int>& nums, int l, int r) {
+        if (l >= r) return ;
+        int mid = l + (r - l) / 2;
+        mergeSort(nums, l, mid);
+        mergeSort(nums, mid + 1, r);
+        merge(nums, l, r, mid);
+    }
+
+    void merge(vector<int>& nums, int l, int r, int mid) {
+        if (l >= r) return ;
+        int p = l, q = mid + 1;
+        int i = l;
+        while(p <= mid && q <= r) {
+            if(nums[p] <= nums[q]) {
+                dummy[i] = nums[p];
+                ++p;
+            } else {
+                dummy[i] = nums[q];
+                ++q;
+            }
+            ++i;
+        }
+        while(p <= mid && i <= r) {
+            dummy[i] = nums[p];
+            ++i;
+            ++p;
+        }
+        while(q <= r && i <= r) {
+            dummy[i] = nums[q];
+            ++i;
+            ++q;
+        }
+        for (i = l; i <= r; ++i) {
+            nums[i] = dummy[i];
+        }
+    }
+    vector<int> dummy;
 };
 
 void debug() {
