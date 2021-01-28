@@ -6,6 +6,7 @@
         "algorithm": "cpp",
         "numeric": "cpp",
         "limits": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "stack": "cpp"
     }
 }
