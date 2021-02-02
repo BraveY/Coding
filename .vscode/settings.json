@@ -7,6 +7,7 @@
         "numeric": "cpp",
         "limits": "cpp",
         "random": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "unordered_map": "cpp"
     }
 }
