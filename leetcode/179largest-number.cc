@@ -16,17 +16,18 @@ class Solution {
 		string nums1 = to_string(a) + to_string(b);
 		string nums2 = to_string(b) + to_string(a);
 		int i = 0;
-		while (i < nums1.size()) {
-			if (nums1[i] != nums2[i]) {
-				return nums1[i] > nums2[i];
-				break;
-			}
-			i++;
-		}
-		return false;
+		// while (i < nums1.size()) {
+		// 	if (nums1[i] != nums2[i]) {
+		// 		return nums1[i] > nums2[i];
+		// 		break;
+		// 	}
+		// 	i++;
+		// }
+		// return false;
+		return nums1 > nums2; // 直接对两个字符串进行比较
 	}
 	string largestNumber(vector<int>& nums) {
-		sort(nums.begin(), nums.end(), compare);
+		sort(nums.begin(), nums.end(), compare);//为compare(a,b)为true则a在b前面
 		string rtn;
 		for (int i = 0; i < nums.size(); i++) {
 			rtn += to_string(nums[i]);

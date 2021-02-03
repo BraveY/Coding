@@ -6,7 +6,7 @@ https://leetcode.com/problems/kth-largest-element-in-an-array/
 #include <vector>
 using namespace std;
 
-class Solution1{
+class Solution{
 	private:
 		
 	public:
@@ -47,7 +47,7 @@ class Solution1{
 		}
 };
 
-class Solution {
+class Solution1 {
 public:
     int findKthLargest(vector<int>& nums, int k) {
         int left = 0, right = nums.size() - 1, kth;
