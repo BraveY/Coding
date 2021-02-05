@@ -36,6 +36,7 @@ class Solution1 {
 };
 /*
 two pointer,先到末尾的就是二者差值
+到了相交节点的时候二者走过的路程都是B+C+A，刚好二者都相交。
 Runtime: 52 ms, faster than 74.38% of C++ online submissions for Intersection of Two Linked Lists.
 Memory Usage: 14.9 MB, less than 26.36% of C++ online submissions for Intersection of Two Linked Lists.
  */

@@ -24,7 +24,7 @@ struct ListNode {
   ListNode(int x) : val(x), next(NULL) {}
 };
 
-class Solution {
+class Solution1 {
  public:
   ListNode* mergeTwoLists(ListNode* l1, ListNode*l2) {
     //返回的是指针，因此要么用原来存在的节点地址，要么用new来创建节点。
@@ -46,6 +46,28 @@ class Solution {
 
     return dummy.next;
   }
+};
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if (!l1) return l2;
+        if (!l2) return l1;
+        ListNode* dummy = new ListNode(0);
+        ListNode* cur = dummy; //最开始的cur指向dummy，cur理解成已经排好序的节点。
+        while(l1 && l2) {
+            if (l1->val <= l2->val) {
+                cur->next = l1 ; //操作cur当前节点的下一个指向节点。
+                l1 = l1->next;
+            }else {
+                cur->next = l2;
+                l2 = l2->next;
+            }
+            cur = cur->next;
+        }
+        if (l1) cur->next = l1;
+        if (l2) cur->next = l2;
+        return dummy->next;
+    }
 };
 class Solution2 {
   ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
