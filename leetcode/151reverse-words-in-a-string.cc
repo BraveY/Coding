@@ -16,27 +16,39 @@ void cout_vector(vector<int>& nums) {
 	}
 	cout << endl;
 }
+/*
+Runtime: 8 ms, faster than 46.87% of C++ online submissions for Reverse Words in a String.
+Memory Usage: 7.9 MB, less than 45.99% of C++ online submissions for Reverse Words in a String.
+*/
 class Solution {
-	public:
-	vector<int> ans;
-	void quickSort(vector<int>& nums, int l, int r) {
-		if (l >= r) return;
-		int pivotIndex = partition(nums, l, r);
-		quickSort(nums, l, pivotIndex - 1);
-		quickSort(nums, pivotIndex + 1, r);
-	}
-	int partition(vector<int>& nums, int l, int r) {
-		int pivotIndex = r;
-		int pivot = nums[pivotIndex];
-		while( l <= r) {
-			if (nums[l] >= pivot && nums[r] <= pivot) swap(nums[l], nums[r]);
-			if (nums[l] <= pivot ) ++l;
-			if (nums[r] >= pivot) --r;
-		}
-		swap(nums[l], nums[pivotIndex]);
-		pivotIndex = l;
-		return l;
-	}
+  public:
+    string reverseWords(string s) {
+        vector<string> words;
+        int flag = 0;
+        string rtn;
+        string str;
+        for(int i = 0; i < s.size(); ++i){
+            if(!flag && s[i]==' ') continue;
+            else if (!flag && s[i]!=' '){
+                flag = 1;
+                str += s[i];
+            }
+            else if (flag && s[i] != ' ') str += s[i];
+            else {
+                flag = 0;
+                words.push_back(str);
+                str = "";
+            }
+        }
+        if (str.size()) words.push_back(str);
+        for(int i = words.size() - 1; i >= 0; --i){
+            rtn += words[i];
+            if (i) rtn += " ";
+        }
+        return rtn;
+    }
+
+  private:
 };
 
 
@@ -44,7 +56,7 @@ void debug() {
 	Solution sol;
 
 	//一维数组的输入
-	vector<int> nums1 = {1, 2, 3, 9, 8, 4};
+	// vector<int> nums1 = {1, 2, 3, 0, 0, 0};
 	// vector<int> nums2;
 	// int i;
 	// while (cin >> i) {
@@ -67,8 +79,6 @@ void debug() {
 	// vector<vector<int>> grid{{1,3,1},{1,5,1},{4,2,1}};
 	//二叉树输入
 	//TreeNode* root = stringToTreeNode("[3,9,20,null,null,15,7]")
-    sol.quickSort(nums1, 0, nums1.size() - 1);
-    cout_vector(nums1);
 	return;
 }
 

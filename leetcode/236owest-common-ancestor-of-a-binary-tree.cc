@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-05-27 10:13:46
+ * @LastEditTime: 2021-03-08 15:27:40
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\leetcode\236owest-common-ancestor-of-a-binary-tree.cc
+ */
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -14,6 +22,7 @@ using namespace std;
 /*
 Runtime: 24 ms, faster than 53.86% of C++ online submissions for Lowest Common Ancestor of a Binary Tree.
 Memory Usage: 17.3 MB, less than 36.36% of C++ online submissions for Lowest Common Ancestor of a Binary Tree.
+保存根节点到目标节点的路径，两条路径的公共部分就是共同的祖先。最后面的就是最低的祖先
  */
 class Solution {
   public:
@@ -26,7 +35,7 @@ class Solution {
 		if (p_path.size() > q_path.size())
 			swap(p_path, q_path);
 		int i = 0;
-		for (; i < p_path.size(); i++) {
+		for (; i < p_path.size(); i++) { 
 			if (p_path[i] != q_path[i])
 				break;
 		}
