@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-03-13 13:06:41
+ * @LastEditTime: 2021-03-13 13:06:41
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\leetcode-cn\JZ03findRepeatNumber.cc
+ */
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -18,7 +26,16 @@ void cout_vector(vector<int>& nums) {
 }
 class Solution {
   public:
-	int solution() {}
+    int findRepeatNumber(vector<int>& nums) {
+        for (int i = 0; i < nums.size(); ++i) {
+            if ( i == nums[i]) continue; //在对应得位置上，不交换
+            if (nums[i] == nums[nums[nums[i]]]) { // 对应位置上有正常元素，重复。
+                return nums[i];
+            }
+            swap(nums[i], nums[nums[i]]);
+        }
+        return -1;
+    }
 
   private:
 };

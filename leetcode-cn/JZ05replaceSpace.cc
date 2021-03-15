@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-03-10 15:30:22
+ * @LastEditTime: 2021-03-10 15:45:09
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\leetcode-cn\JZ05replaceSpace.cc
+ */
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -16,12 +24,38 @@ void cout_vector(vector<int>& nums) {
 	}
 	cout << endl;
 }
+/*
+执行用时：
+4 ms
+, 在所有 C++ 提交中击败了
+30.40%
+的用户
+内存消耗：
+6 MB
+, 在所有 C++ 提交中击败了
+87.90%
+的用户
+
+如果在原字符串上进行修改需要从后往前进行。
+*/
 class Solution {
   public:
-	int solution() {}
+	string replaceSpace(string s) {
+        int len = s.size();
+        string retStr;
+        for (int i = 0; i < len; ++i) {
+            if (s[i] != ' ') {
+                retStr += s[i];
+            }else {
+                retStr += "%20";
+            }
+        }
+        return retStr;
+    }
 
   private:
 };
+
 
 
 void debug() {
@@ -51,9 +85,6 @@ void debug() {
 	// vector<vector<int>> grid{{1,3,1},{1,5,1},{4,2,1}};
 	//二叉树输入
 	//TreeNode* root = stringToTreeNode("[3,9,20,null,null,15,7]")
-	//链表输入使用lclist.h
-    //ListNode* head = stringToListNode("[1,3,2]");
-	// prettyPrintLinkedList(head);
 	return;
 }
 

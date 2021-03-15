@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-03-13 14:04:17
+ * @LastEditTime: 2021-03-13 14:13:55
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\leetcode\413arithmetic-slices.cc
+ */
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -16,9 +24,24 @@ void cout_vector(vector<int>& nums) {
 	}
 	cout << endl;
 }
+
+/*
+Runtime: 4 ms, faster than 64.97% of C++ online submissions for Arithmetic Slices.
+Memory Usage: 7.3 MB, less than 65.48% of C++ online submissions for Arithmetic Slices.
+*/
 class Solution {
   public:
-	int solution() {}
+    int numberOfArithmeticSlices(vector<int>& nums) {
+        int n = nums.size();
+        if (n < 3) return -1;
+        vector<int> dp(n,0);
+        for (int i = 2; i < n; ++i) {
+            if (nums[i] - nums[i - 1] == nums[i - 1] - nums[i -2]) {
+                dp[i] = dp[i - 1] + 1;
+            }
+        }
+        return accumulate(dp.begin(), dp.end(), 0); // 0是累加得初始值
+    }
 
   private:
 };

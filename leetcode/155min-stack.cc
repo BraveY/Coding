@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-02-14 11:54:43
+ * @LastEditTime: 2021-03-10 10:56:47
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\leetcode\155min-stack.cc
+ */
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -12,6 +20,7 @@ using namespace std;
 /*
 Runtime: 24 ms, faster than 98.56% of C++ online submissions for Min Stack.
 Memory Usage: 17 MB, less than 61.82% of C++ online submissions for Min Stack.
+每次的最小元素压入另一个辅助栈
  */
 class MinStack {
  public:

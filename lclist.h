@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-09-11 20:57:08
+ * @LastEditTime: 2021-03-10 21:05:39
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\lclist.h
+ */
 
 #include <limits.h>
 #include <stdio.h>
@@ -72,7 +80,7 @@ void prettyPrintLinkedList(ListNode* node) {
     }
 }
 
-int debug() {
+int lclist_debug() {
     string line;
     while (getline(cin, line)) {
         ListNode* head = stringToListNode(line);
