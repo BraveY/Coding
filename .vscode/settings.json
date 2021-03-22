@@ -13,6 +13,7 @@
         "queue": "cpp",
         "xutility": "cpp",
         "deque": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "ostream": "cpp"
     }
 }
