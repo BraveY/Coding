@@ -128,7 +128,7 @@
 |      | 20   | [Valid Parentheses](https://leetcode.com/problems/valid-parentheses) | **Easy**   |           |
 |      | 946  | [Validate Stack Sequences](https://leetcode.com/problems/validate-stack-sequences) | **Medium** |           |
 |      | 331  | [Verify Preorder Serialization of a Binary Tree](https://leetcode.com/problems/verify-preorder-serialization-of-a-binary-tree) | **Medium** |           |
-|      | 224  |                                                              | **Hard**   |           |
+|      | 224  | https://leetcode.com/problems/basic-calculator/              | **Hard**   |           |
 
 ## Sliding Windows
 
@@ -162,6 +162,7 @@
 |      | 239  | [Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum) | 44.7%      | **Hard**   |
 |      | 264  | [Ugly Number II](https://leetcode.com/problems/ugly-number-ii) | 42.9%      | **Medium** |
 |      | 23   | [Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists) | 42.8%      | **Hard**   |
+|      | 295  | [Find Median from Data Stream](https://leetcode.com/problems/find-median-from-data-stream) |            |            |
 
 ## Divide and Conquer
 
