@@ -1,10 +1,10 @@
 /*
  * @Author: your name
- * @Date: 2019-11-22 15:00:25
- * @LastEditTime: 2021-04-10 14:22:45
- * @LastEditors: your name
+ * @Date: 2021-04-06 20:31:10
+ * @LastEditTime: 2021-04-06 20:49:27
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
- * @FilePath: \Coding\solution_template.cc
+ * @FilePath: \Coding\leetcode-cn\JZ47maxValueofGift.cc
  */
 #include <limits.h>
 #include <stdio.h>
@@ -24,10 +24,34 @@ void cout_vector(vector<int>& nums) {
 	}
 	cout << endl;
 }
+/*
+执行用时：
+8 ms
+, 在所有 C++ 提交中击败了
+83.61%
+的用户
+内存消耗：
+9.3 MB
+, 在所有 C++ 提交中击败了
+17.77%
+的用户
+*/
 class Solution {
-  private:
   public:
-	int solution() {}
+    int maxValue(vector<vector<int>>& grid) {
+        int m = grid.size();
+        if (m == 0) return 0;
+        int n = grid[0].size();
+        vector<vector<int> > dp(m + 1, vector<int>(n + 1, 0));
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                dp[i+1][j+1] = max(dp[i][j+1], dp[i+1][j]) + grid[i][j];
+            }
+        }
+        return dp[m][n];
+    }
+
+  private:
 };
 
 
