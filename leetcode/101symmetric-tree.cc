@@ -21,7 +21,7 @@ Memory Usage: 16.9 MB, less than 8.48% of C++ online submissions for Symmetric T
  */
 class Solution1 {
  public:
-	bool isSymmetric(TreeNode* root) {
+	bool mmetric(TreeNode* root) {
 		if (!root) return true;
 		queue<TreeNode*> q;
 		q.push(root);
@@ -59,7 +59,7 @@ Memory Usage: 16.3 MB, less than 8.48% of C++ online submissions for Symmetric T
  */
 class Solution {
  public:
-	bool isSymmetric(TreeNode* root) {
+	bool mmetric(TreeNode* root) {
 		if (!root) return true;
 		return isSame(root, root);
 	}
@@ -89,7 +89,7 @@ void Treedebug() {
 	while (getline(cin, line)) {
 		TreeNode* root = stringToTreeNode(line);
 
-		bool ret = Solution().isSymmetric(root);
+		bool ret = Solution().mmetric(root);
 
 		string out = boolToString(ret);
 		cout << out << endl;

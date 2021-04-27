@@ -152,6 +152,7 @@
 |      | 148  | [Sort List](https://leetcode.com/problems/sort-list)         | 46.4%      | **Medium** |
 |      | 242  | [Valid Anagram](https://leetcode.com/problems/valid-anagram) | 58.7%      | **Easy**   |
 |      | 324  | [Wiggle Sort II](https://leetcode.com/problems/wiggle-sort-ii) | 30.7%      | **Medium** |
+|      | 912  | [Sort an Array](https://leetcode.com/problems/sort-an-array) | 64.6%      | **Medium** |
 
 ## Heap
 

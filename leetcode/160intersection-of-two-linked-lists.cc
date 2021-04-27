@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-16 20:39:06
+ * @LastEditTime: 2021-04-17 12:18:38
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\leetcode\160intersection-of-two-linked-lists.cc
+ */
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -47,7 +55,7 @@ class Solution {
 		ListNode* curA = headA;
 		ListNode* curB = headB;
 		while (curA != curB) {
-			curA = curA == NULL ? headB : curA->next;
+			curA = curA == NULL ? headB : curA->next; // 不能用curA->next来判断是否为空，因为忽略了不相交的情况，然后陷入死循环
 			curB = curB == NULL ? headA : curB->next;
 		}
 		return curA;

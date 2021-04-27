@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-05-18 10:16:14
+ * @LastEditTime: 2021-04-22 22:56:48
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\binarytree.h
+ */
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -78,13 +86,17 @@ string boolToString(bool input) {
 }
 
 // void Treedebug() {
+ /*
+ 	line = "[1,2,2,null,3,null,3]" 从上往下宽度遍历，输入为全二叉树补全操作。表示的树为：	
+      	1
+       / \
+      /   \
+    2       2
+   / \     / \
+  n   3   n   3
+ */
 // 	string line;
 // 	while (getline(cin, line)) {
 // 		TreeNode* root = stringToTreeNode(line);
-
-// 		bool ret = Solution().isSymmetric(root);
-
-// 		string out = boolToString(ret);
-// 		cout << out << endl;
 // 	}
 // }

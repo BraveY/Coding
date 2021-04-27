@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2021-03-09 10:56:14
- * @LastEditTime: 2021-03-09 16:16:44
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \Coding\leetcode\8string-to-integer-atoi.cc
- */
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -26,10 +18,28 @@ void cout_vector(vector<int>& nums) {
 }
 class Solution {
   public:
-	int myAtoi(string str) {
+    int myAtoi(string s) {
         long long result = 0;
         int sign = 1;
-        int i = str.find_first_not_of(' ');
+        int i = 0;
+        while( s[i] == ' ') {
+            ++i;
+        }
+        if (s[i] == '+' || s[i] == '-' ) {
+            sign = s[i++] == '+' ? 1 : -1;
+        }else if (!isdigit(s[i])) return 0;
+        while(i < s.size() && isdigit(s[i])) {
+            result = result * 10 + (s[i] - '0');
+            if (result*sign <= INT_MIN) return INT_MIN;
+            if (result*sign >= INT_MAX) return INT_MAX;
+            ++i;
+        }
+        return result*sign;
+    }  
+	int myAtoiFunc(string str) {
+        long long result = 0;
+        int sign = 1;
+        int i = str.find_first_not_of(' '); // 用循环替代
         if (i < 0) {
             return 0;
         }

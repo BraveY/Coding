@@ -25,7 +25,7 @@ class Solution {
   ListNode* reverseList(ListNode* head) {
     if (!head) return NULL;
     ListNode* iter = head;
-    ListNode* last = NULL;
+    ListNode* last = NULL; //一定要考虑将头部的next指向null元素，不能直接将last置为head,会变成循环链表。
     while (iter) {  //最后一个末尾元素也要改变指针指向。
       ListNode* tmp = iter->next;
       iter->next = last;

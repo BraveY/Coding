@@ -1,11 +1,3 @@
-/*
- * @Author: your name
- * @Date: 2019-11-22 15:00:25
- * @LastEditTime: 2021-04-10 14:22:45
- * @LastEditors: your name
- * @Description: In User Settings Edit
- * @FilePath: \Coding\solution_template.cc
- */
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>

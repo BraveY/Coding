@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-04-05 21:33:25
+ * @LastEditTime: 2021-04-26 09:15:39
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\leetcode\141linked-list-cycle.cc
+ */
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -38,8 +46,9 @@ class Solution {
 class Solution2 {
   public:
 	bool hasCycle(ListNode *head) {
+        if (!head) return false;
 		ListNode* slow = head;
-		ListNode* fast = head;
+		ListNode* fast = head->next;    
 		while (fast) {
 			//必须先判断next是否为空，否则出现空指针的引用
 			if (!fast->next) return false;

@@ -43,6 +43,7 @@ class Solution {
 /*
 Runtime: 20 ms, faster than 77.56% of C++ online submissions for Longest Substring Without Repeating Characters.
 Memory Usage: 7.5 MB, less than 78.82% of C++ online submissions for Longest Substring Without Repeating Characters.
+Hash表加移动窗口
  */
 class Solution2 {
   public:
@@ -51,7 +52,7 @@ class Solution2 {
 		int ans = 0;
 		vector<int> idx(128, -1);
 		for (int i = 0, j = 0; j < n; ++j) {
-			i = max(i, idx[s[j]] + 1);
+			i = max(i, idx[s[j]] + 1); // i 是起始位置，判断当前字符的上一次出现位置如果比当前起点大则会出现重复，所以更新到重复的下一个位置。
 			ans = max(ans, j - i + 1);
 			idx[s[j]] = j;
 		}

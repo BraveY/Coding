@@ -33,7 +33,7 @@ class Solution {
 			if (nums[l] <= pivot ) ++l;
 			if (nums[r] >= pivot) --r;
 		}
-		swap(nums[l], nums[pivotIndex]);
+		swap(nums[l], nums[pivotIndex])// 以右边为pivot则与左边换，并返回左边
 		pivotIndex = l;
 		return l;
 	}

@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-22 08:33:55
+ * @LastEditTime: 2021-04-26 09:19:39
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\leetcode\234palindrome-linked-list.cc
+ */
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -13,13 +21,14 @@ using namespace std;
 /*
 Runtime: 32 ms, faster than 66.66% of C++ online submissions for Palindrome Linked List.
 Memory Usage: 14.1 MB, less than 67.52% of C++ online submissions for Palindrome Linked List.
+如果节点为偶数，则左右两个一人一半，如果为奇数则左边多一个，但按照右边的个数来循环比较就可以了。
  */
 class Solution {
   public:
 	bool isPalindrome(ListNode* head) {
 		if (!head) return true;
 		ListNode* slow = head;
-		ListNode* fast = head->next;
+		ListNode* fast = head->next;// 考虑两个节点的情况
 		while (fast && fast->next) {
 			slow = slow ->next;
 			fast = fast->next->next;
@@ -58,28 +67,6 @@ void cout_vector(vector<int>& nums) {
 
 void debug() {
 	Solution sol;
-
-	//一维数组的输入
-	// vector<int> nums1 = {1, 2, 3, 0, 0, 0};
-	// vector<int> nums2;
-	// int i;
-	// while (cin >> i) {
-	// 	nums2.push_back(i);
-	// }
-	// cout << sol.solution(nums2) << endl;
-
-	//二维数组的输入
-	//int m, n;
-	// while (cin >> m >> n) {
-	// 	vector<vector<int>> grid(m, vector<int>(n));
-	// 	for (int i = 0; i < m; i++) {
-	// 		for (int j = 0; j < n; j++ ) {
-	// 			cin >> grid[i][j];
-	// 		}
-	// 	}
-	// 	int ans = sol.solution(grid);
-	// 	cout << ans << endl;
-	// }
 	return;
 }
 

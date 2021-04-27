@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-01-02 19:50:28
+ * @LastEditTime: 2021-04-25 23:09:11
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\leetcode\146lru-cache.cc
+ */
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -46,18 +54,18 @@ class LRUCache {
   private:
     int _capacity;
     list<int> lru; //链表按序存放使用的key,新使用的放在最前面
-    unordered_map<int, list<int>::iterator> mp; //记录key在链表的位置。
+    unordered_map<int, list<int>::iterator> mp; //记录key在链表的位置。需要使用迭代器而不是指针，list::erase()需要传入指针
     unordered_map<int, int> kv;
 
     void updateLRU(int key) { 
         if (kv.count(key)){ //在kv中的key必须保证存在于lru链表中，所以必须先更新lru再插入新的key在kv中。
-            lru.erase(mp[key]); //已经存在的key需要删除后提到最前。
+            lru.erase(mp[key]); //已经存在的key需要删除后提到最前。 需要传入迭代器
         }
         lru.push_front(key); 
         mp[key] = lru.begin();
     }
     void evict(){
-        mp.erase(lru.back());
+        mp.erase(lru.back()); // map::erase() 直接传入值就可以，因为是唯一的key
         kv.erase(lru.back());
         lru.pop_back();
     }
@@ -79,29 +87,6 @@ void cout_vector(vector<int>& nums) {
 
 void debug() {
 	Solution sol;
-
-	//一维数组的输入
-	// vector<int> nums1 = {1, 2, 3, 0, 0, 0};
-	// vector<int> nums2;
-	// int i;
-	// while (cin >> i) {
-	// 	nums2.push_back(i);
-	// }
-	// cout << sol.solution(nums2) << endl;
-
-	//二维数组的输入
-	//int m, n;
-	// while (cin >> m >> n) {
-	// 	vector<vector<int>> grid(m, vector<int>(n));
-	// 	for (int i = 0; i < m; i++) {
-	// 		for (int j = 0; j < n; j++ ) {
-	// 			cin >> grid[i][j];
-	// 		}
-	// 	}
-	// 	int ans = sol.solution(grid);
-	// 	cout << ans << endl;
-	// }
-	// vector<vector<int>> grid{{1,3,1},{1,5,1},{4,2,1}};
 	return;
 }
 

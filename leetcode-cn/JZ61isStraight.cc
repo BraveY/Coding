@@ -1,10 +1,10 @@
 /*
  * @Author: your name
- * @Date: 2021-03-16 23:05:14
- * @LastEditTime: 2021-04-17 16:37:29
+ * @Date: 2021-04-16 21:28:06
+ * @LastEditTime: 2021-04-16 22:12:34
  * @LastEditors: Please set LastEditors
- * @Description: C专家编程中关于int 和uint 比较的bug 实验， 书P24
- * @FilePath: \Coding\exps\CExperts_bugtest.cc
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\leetcode-cn\JZ61isStraight.cc
  */
 #include <limits.h>
 #include <stdio.h>
@@ -18,51 +18,54 @@
 
 using namespace std;
 
-
-
-// #define TOTAL_ELEMENTS (sizeof(array) / sizeof(array[0]))
-
-
-
 void cout_vector(vector<int>& nums) {
 	for (auto i : nums) {
-		cout << i << ' ';                            
-		
+		cout << i << ' ';
 	}
 	cout << endl;
 }
+/*执行用时：
+4 ms
+, 在所有 C++ 提交中击败了
+56.21%
+的用户
+内存消耗：
+9.9 MB
+, 在所有 C++ 提交中击败了
+36.77%
+的用户
+*/
 class Solution {
-  public:
-	int compareSingnedAndUnsigned() {
-        int array[] = { 23, 34,12,17,204,99,16};
-        int d = -1, x;
-        if (d <= (int) (sizeof(array) / sizeof(array[0])) - 2){ // 不加int 不会进入if语句
-            cout << d << endl;
-            x = array[d+1];            
-            cout << x << endl;cout << d << endl;
-        }
-        cout << d << endl;
-        return 0;
-    }
-
-	void stringMerge() {
-		char *resource[] = {
-			"monitor",
-			"disk",
-			"mouse"
-			"keybord",
-			"pen",
-		};
-		cout << resource[2] << endl;
-	}
   private:
+  public:
+	bool isStraight(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int gap = 0;
+        int zeroCnt = 0;
+        int i = 0;
+        while (i < nums.size() && nums[i] == 0)
+        {
+            ++zeroCnt;
+            ++i;
+        }
+        ++i;
+        while (i < nums.size())
+        {
+            if (nums[i] == nums[i - 1] && nums[i] != 0) return false;           
+            gap = nums[i] - nums[i - 1] - 1;
+            if (gap <= zeroCnt) {               
+                zeroCnt -= gap;
+                ++i;
+            }else return false;            
+        }
+        return true;
+    }
 };
 
 
 void debug() {
 	Solution sol;
 
-    sol.stringMerge();
 	//一维数组的输入
 	// vector<int> nums1 = {1, 2, 3, 0, 0, 0};
 	// vector<int> nums2;

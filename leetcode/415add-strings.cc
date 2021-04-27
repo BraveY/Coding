@@ -1,10 +1,10 @@
 /*
  * @Author: your name
- * @Date: 2021-03-16 23:05:14
- * @LastEditTime: 2021-04-17 16:37:29
+ * @Date: 2021-04-21 23:07:02
+ * @LastEditTime: 2021-04-21 23:28:28
  * @LastEditors: Please set LastEditors
- * @Description: C专家编程中关于int 和uint 比较的bug 实验， 书P24
- * @FilePath: \Coding\exps\CExperts_bugtest.cc
+ * @Description: In User Settings Edit
+ * @FilePath: \Coding\leetcode\415add-strings.cc
  */
 #include <limits.h>
 #include <stdio.h>
@@ -18,51 +18,53 @@
 
 using namespace std;
 
-
-
-// #define TOTAL_ELEMENTS (sizeof(array) / sizeof(array[0]))
-
-
-
 void cout_vector(vector<int>& nums) {
 	for (auto i : nums) {
-		cout << i << ' ';                            
-		
+		cout << i << ' ';
 	}
 	cout << endl;
 }
+/*
+Runtime: 4 ms, faster than 78.72% of C++ online submissions for Add Strings.
+Memory Usage: 6.7 MB, less than 49.01% of C++ online submissions for Add Strings.
+*/
 class Solution {
-  public:
-	int compareSingnedAndUnsigned() {
-        int array[] = { 23, 34,12,17,204,99,16};
-        int d = -1, x;
-        if (d <= (int) (sizeof(array) / sizeof(array[0])) - 2){ // 不加int 不会进入if语句
-            cout << d << endl;
-            x = array[d+1];            
-            cout << x << endl;cout << d << endl;
-        }
-        cout << d << endl;
-        return 0;
-    }
-
-	void stringMerge() {
-		char *resource[] = {
-			"monitor",
-			"disk",
-			"mouse"
-			"keybord",
-			"pen",
-		};
-		cout << resource[2] << endl;
-	}
   private:
+  public:
+	string addStrings(string num1, string num2){
+        reverse(num1.begin(), num1.end());
+        reverse(num2.begin(), num2.end());
+        vector<char> convertDict = {
+            '0','1','2','3','4','5','6','7','8','9'
+        };
+        string rtn = "";
+        if (num1.size() > num2.size()) swap(num1, num2);
+        int digit = 0;
+        int i = 0;
+        for(int i = 0; i < num2.size(); ++i) {
+            int a = 0;
+            if (i < num1.size())  a = num1[i] - '0';            
+            int b = num2[i] - '0';
+            int c;
+            if (a + b + digit >= 10) {
+                c = a + b + digit - 10;
+                digit = 1;
+            } else {
+                c = a + b + digit;
+                digit = 0;
+            }
+            rtn += convertDict[c];
+        }
+        if (digit) rtn += '1';
+        reverse(rtn.begin(), rtn.end());
+        return rtn;
+    }
 };
 
 
 void debug() {
 	Solution sol;
 
-    sol.stringMerge();
 	//一维数组的输入
 	// vector<int> nums1 = {1, 2, 3, 0, 0, 0};
 	// vector<int> nums2;
