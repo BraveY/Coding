@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-07-16 20:39:06
- * @LastEditTime: 2021-04-17 12:18:38
+ * @LastEditTime: 2021-04-29 14:25:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \Coding\leetcode\160intersection-of-two-linked-lists.cc
@@ -54,7 +54,7 @@ class Solution {
 		if (headA == NULL || headB == NULL) return NULL;
 		ListNode* curA = headA;
 		ListNode* curB = headB;
-		while (curA != curB) {
+		while (curA != curB) { // 最终一定会相等，因为A和B都走了一样的路程，所以不相交也有curA==curB==NULL
 			curA = curA == NULL ? headB : curA->next; // 不能用curA->next来判断是否为空，因为忽略了不相交的情况，然后陷入死循环
 			curB = curB == NULL ? headA : curB->next;
 		}

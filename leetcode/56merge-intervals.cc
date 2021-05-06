@@ -1,3 +1,6 @@
+
+
+
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -9,50 +12,32 @@
 
 using namespace std;
 
-class WrongSolution {
- public:
-  vector<vector<int>> merge(vector<vector<int>>& intervals) {
-    int n = intervals.size();
-    vector<vector<int>> ans;
-    if (n) ans = merge_helper(0, n - 1, intervals);
-    return ans;
-  }
-
- private:
-  vector<vector<int>> merge_helper(int lo, int hi,
-                                   vector<vector<int>>& intervals) {
-    vector<vector<int>> rtn;
-    if (lo >= hi) {
-      rtn.push_back(intervals[lo]);
-      return rtn;
+bool compare(vector<int>& a, vector<int>& b) { // 必须为全局函数或者静态函数
+      return a[0] < b[0]; //左边有排序就好，右边会进行比较
     }
-    int mid = lo + (hi - lo) / 2;
-    vector<vector<int>> left = merge_helper(lo, mid, intervals);
-    vector<vector<int>> right = merge_helper(mid + 1, hi, intervals);
-    int left_size = left.size();
-    int right_size = right.size();
-    for (int i = 0; i < left_size + right_size; i++) {
-      if (i < left_size - 1) {
-        rtn.push_back(left[i]);
-      } else if (i == left_size - 1) {
-        if (left[i][1] >= right[0][0] && left[i][0] <= right[0][1]) {
-          std::vector<int> gap;
-          gap.push_back(min(left[i][0], right[0][0]));
-          gap.push_back(max(left[i][1], right[0][1]));
-          rtn.push_back(gap);
-          i++;
-        } else {
-          rtn.push_back(left[i]);
-        }
-      } else {
-        rtn.push_back(right[i - left_size]);
-      }
-    }
-    return rtn;
-  }
-};
 
 class Solution {
+public:    
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>> ans;
+        sort(intervals.begin(), intervals.end(), compare);
+        vector<int> tmp = intervals[0];
+        ans.push_back(tmp);
+        for(int i = 1; i < intervals.size(); ++i) {
+            tmp = ans.back();
+            if (intervals[i][0] <= tmp[1]) {
+                ans.back()[1] = max(intervals[i][1], ans.back()[1]);//右边需要比较一下
+                
+                          
+            }else{
+                ans.push_back(intervals[i]);
+            }
+        }
+        return ans;
+    }
+};
+
+class Solution1 {
  public:
   vector<vector<int>> merge(vector<vector<int>>& intervals) {
     if (intervals.empty()) return {};

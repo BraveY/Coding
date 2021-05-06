@@ -46,6 +46,7 @@ class Solution1 {
 /*
 Runtime: 4 ms, faster than 83.01% of C++ online submissions for Remove Nth Node From End of List.
 Memory Usage: 10.4 MB, less than 72.66% of C++ online submissions for Remove Nth Node From End of List.
+卡尺的概念，构建两个指针，快指针与慢指针差n个。
  */
 class Solution {
   public:
@@ -53,9 +54,9 @@ class Solution {
 		if (!head) return nullptr;
 		ListNode newHead(-1);
 		newHead.next = head;
-		ListNode* fast = &newHead;
+		ListNode* fast = &newHead; //指向head无法删除head
 		ListNode* slow = &newHead;
-		for (int i = 0; i < n; ++i) {
+		for (int i = 0; i < n; ++i) {//快指针移动n步，与慢指针相差n个节点
 			fast = fast->next;
 		}
 		while (fast->next) { //需要指向待删除节点的上一个

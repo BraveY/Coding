@@ -61,7 +61,7 @@ class Solution {
  public:
 	bool mmetric(TreeNode* root) {
 		if (!root) return true;
-		return isSame(root, root);
+		return isSame(root, root); // 原始的入口有两个数比较
 	}
 
  private:

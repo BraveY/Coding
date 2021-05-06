@@ -1,3 +1,6 @@
+
+
+
 #include <limits.h>
 #include <stdio.h>
 #include <algorithm>
@@ -10,8 +13,11 @@
 using namespace std;
 
 /*
-Runtime: 148 ms, faster than 5.17% of C++ online submissions for Construct Binary Tree from Preorder and Inorder Traversal.
-Memory Usage: 73.6 MB, less than 9.52% of C++ online submissions for Construct Binary Tree from Preorder and Inorder Traversal.
+Runtime: 20 ms, faster than 61.73% of C++ online submissions for Construct Binary Tree from Preorder and Inorder Traversal.
+Memory Usage: 74 MB, less than 11.56% of C++ online submissions for Construct Binary Tree from Preorder and Inorder Traversal.
+根据先序确定root节点位置，然后根据中序来划分左右节点的中序序列，然后根据左右节点的序列长度来划分先序的左右序列
+递归构建，每次构建root节点。
+重点在于切分左右序列
  */
 class Solution {
  public:
@@ -19,8 +25,7 @@ class Solution {
 		if (preorder.empty()) return nullptr;
 		TreeNode* root = new TreeNode(preorder[0]);
 		if (preorder.size() == 1) return root;
-		vector<int>::iterator rootP = find(inorder.begin(), inorder.end(), root->val);
-		int root_idx = distance(inorder.begin(), rootP);
+		vector<int>::iterator rootP = find(inorder.begin(), inorder.end(), root->val);		
 		vector<int> left_inorder(inorder.begin(), rootP);//不包含rootp
 		vector<int> right_inorder(rootP + 1, inorder.end());
 		vector<int> left_preorder(preorder.begin() + 1, preorder.begin() + 1 + left_inorder.size());

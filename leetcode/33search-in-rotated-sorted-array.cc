@@ -13,7 +13,7 @@ using namespace std;
 Runtime: 4 ms, faster than 67.57% of C++ online submissions for Search in Rotated Sorted Array.
 Memory Usage: 6.5 M
  */
-class Solution {
+class Solution1 {
  public:
 	int search(vector<int>& nums, int target) {
 		int n = nums.size();
@@ -67,6 +67,37 @@ class Solution {
 		}
 		return rtn;
 	}
+};
+
+/*
+nums[mid]和0比较，判断在第几个阶段
+在两个阶段中又确定一段有序得，依然可以进行二分
+*/
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int l = 0;        
+        int n = nums.size();
+        int r = n - 1;
+        while(l <= r) {
+            int mid = l + (r - l) / 2;
+            if (nums[mid] == target) return mid;
+            if (nums[0] <= nums[mid]) {// 在第一阶段
+                if (nums[0] <= target && target < nums[mid]) { // 不能缺少第一个的等号，否则丢失找的就是第一个情况
+                    r = mid - 1;
+                }else {
+                    l = mid + 1;
+                }
+            }else { // 在第二阶段
+                if (nums[mid] < target && target <= nums[n - 1]) {//不能缺少第二个等号，否则丢失找的最后一个情况
+                    l = mid + 1;
+                }else {
+                    r = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
 };
 
 int main(int argc, char const *argv[]) {

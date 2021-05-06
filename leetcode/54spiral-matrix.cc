@@ -13,50 +13,39 @@ using namespace std;
 Runtime: 0 ms, faster than 100.00% of C++ online submissions for Spiral Matrix.
 Memory Usage: 6.8 MB, less than 90.86% of C++ online submissions for Spiral Matrix.
  */
-class Solution1 {
-  public:
-	vector<int> spiralOrder(vector<vector<int>>& matrix) {
-		int m = matrix.size();
-		if (!m) return {};
-		int n = matrix[0].size();
-		if (!n) return {};
-		vector<int> ans;
-		int top = 0, down = m - 1;
-		int left = 0, right = n - 1;
-		while (top <= down || left <= right) {
-			if (ans.size() == m * n) break;
-			for (int i = left; i < right; ++i) {
-				ans.push_back(matrix[top][i]);
-			}
-			if (top == down) { // one row
-				ans.push_back(matrix[top][right]);
-				break;
-			} else {
-				for (int i = top; i < down; ++i) {
-					ans.push_back(matrix[i][right]);
-				}
-				if (right == left) { // one col
-					ans.push_back(matrix[down][right]);
-					break;
-				} else {
-					for (int i = right; i > left; --i) {
-						ans.push_back(matrix[down][i]);
-					}
-
-					for (int i = down; i > top; --i) {
-						ans.push_back(matrix[i][left]);
-					}
-				}
-			}
-			++top;
-			--right;
-			--down;
-			++left;
-		}
-		return ans;
-	}
-
-  private:
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int top = 0;
+        int bottom = matrix.size() - 1;
+        int left = 0;
+        int right = matrix[0].size() - 1;
+        int numEles = (bottom+1)*(right+1);
+        vector<int> ans;
+        while(numEles >= 1) {
+            for(int i = left; i <= right && numEles >= 1; ++i){
+                ans.push_back(matrix[top][i]);
+                --numEles;
+            }
+            ++top;
+            for(int i = top; i <= bottom && numEles >= 1; ++i) {
+                ans.push_back(matrix[i][right]);
+                --numEles;
+            }
+            --right;
+            for(int i = right; i >= left && numEles >= 1; --i){
+                ans.push_back(matrix[bottom][i]);
+                --numEles;
+            }
+            --bottom;
+            for(int i = bottom; i >= top && numEles>=1; --i){
+                ans.push_back(matrix[i][left]);
+                --numEles;
+            }
+            ++left;
+        }
+        return ans;
+    }
 };
 
 //方向的更新带来步数的更新，完成一次对应方向的对应步数后，对应的步数减少1。

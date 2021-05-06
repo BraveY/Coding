@@ -67,21 +67,21 @@ class Solution2 {
 		ListNode* cur = head;
 		while (cur = cur->next) ++len;
 
-		ListNode dummy(0);
+		ListNode dummy(0);// 存储在栈区，因为head不停在变化所以需要
 		dummy.next = head;
 		ListNode* l;
 		ListNode* r;
-		ListNode* tail;
-		for (int n = 1; n < len; n <<= 1) {
-			cur = dummy.next; // partial sorted head
+		ListNode* tail;//代表已经合并好的链表末尾
+		for (int n = 1; n < len; n <<= 1) {//自下而上构建 
+			cur = dummy.next; // partial sorted head 待排序与合并的链表
 			tail = &dummy;
-			while (cur) {
+			while (cur) {//划分成长度为n的小块然后合并
 				l = cur;
 				r = split(l, n);
 				cur = split(r, n);
 				auto merged = merge(l, r);
 				tail->next = merged.first;  // 合并list的head 让前面合并后末尾指向新合并的头
-				tail = merged.second; // 合并list的tail ，然后重新指向新合并的末尾
+				tail = merged.second; // 合并list的tail ，然后重新指向新合并的末尾 pair 有成员first，和second 不是函数
 			}
 		}
 		return dummy.next;
@@ -89,8 +89,8 @@ class Solution2 {
  private:
 	// Splits the list into two parts, first n element and the rest.
 	// Returns the head of the rest.
-	ListNode* split(ListNode* head, int n) {
-		while (--n && head) // 分割的长度可能超过head 的长度
+	ListNode* split(ListNode* head, int n) { //包含head节点，长度为n
+		while (--n && head) // 分割的长度可能超过head 的长度 ，比如需要分割2个，但是只有1个剩余的节点
 			head = head->next;
 		ListNode* rest = head ? head->next : nullptr;
 		if (head) head->next = nullptr; // 如果有连接 就断开

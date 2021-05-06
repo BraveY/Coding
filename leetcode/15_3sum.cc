@@ -55,31 +55,6 @@ class Solution1 {
 };
 
 
-class Solution {
-  public:
-	vector<vector<int>> threeSum(vector<int>& nums) {
-		vector<vector<int>> ans;
-		sort(nums.begin(), nums.end());
-		int n = nums.size();
-		for (int i = 0; i < n - 2; ++i) {
-			if (nums[i] > 0) break; // 排序后后面的都是正数。
-			if (i > 0 && nums[i] == nums[i - 1]) continue;
-			int l = i + 1;
-			int r = n - 1;
-			while (l < r) {
-				if (nums[i] + nums[l] + nums[r] == 0) {
-					ans.push_back({nums[i], nums[l++], nums[r++]});
-					while ( l < r && nums[l] == nums[l - 1]) ++l;
-					while ( l < r && r + 1 < n && nums[r] == nums[r + 1]) --r;
-				} else if ( nums[i] + nums[l] + nums[r] < 0) ++l;
-				else --r;
-			}
-		}
-		return ans;
-	}
-
-  private:
-};
 
 /*
 Runtime: 84 ms, faster than 88.28% of C++ online submissions for 3Sum.
@@ -92,13 +67,13 @@ class Solution {
 		std::sort(nums.begin(), nums.end());
 		const int n = nums.size();
 		for (int i = 0; i < n - 2; ++i) {
-			if (nums[i] > 0) break;
+			if (nums[i] > 0) break; // 排序后后面的都是正数。
 			if (i > 0 && nums[i] == nums[i - 1]) continue;
 			int l = i + 1;
 			int r = n - 1;
 			while (l < r) {
 				if (nums[i] + nums[l] + nums[r] == 0) {
-					ans.push_back({nums[i], nums[l++], nums[r--]});
+					ans.push_back({nums[i], nums[l++], nums[r--]});//必须将l,r各自移动到下一位，不然后面循环判断的时候会直接退出比如2，3，3当l=1的时候，nums[l] != nums[l-1]
 					while (l < r && nums[l] == nums[l - 1]) ++l;
 					while (l < r && nums[r] == nums[r + 1]) --r;
 				} else if (nums[i] + nums[l] + nums[r] < 0) {

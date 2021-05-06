@@ -20,34 +20,41 @@ using namespace std;
 /*
 Runtime: 24 ms, faster than 98.56% of C++ online submissions for Min Stack.
 Memory Usage: 17 MB, less than 61.82% of C++ online submissions for Min Stack.
-每次的最小元素压入另一个辅助栈
+每次的最小元素压入另一个辅助栈,空间换时间
  */
 class MinStack {
- public:
-  /** initialize your data structure here. */
-  std::vector<int> stack;
-  std::vector<int> min_vec;
-  MinStack() {}
+public:
+    /** initialize your data structure here. */
+    vector<int> data;
+    vector<int> minVec;
+    MinStack() {
 
-  void push(int x) {
-    int min_last = 0;
-    if (min_vec.size())
-      min_last = getMin();
-    else
-      min_last = x;
-    int min_now = min(min_last, x);
-    min_vec.push_back(min_now);
-    stack.push_back(x);
-  }
-
-  void pop() {
-    min_vec.pop_back();
-    stack.pop_back();
-  }
-
-  int top() { return stack[stack.size() - 1]; }
-
-  int getMin() { return min_vec[min_vec.size() - 1]; }
+    }
+    
+    void push(int val) {
+        if (data.empty()) {
+            data.push_back(val);
+            minVec.push_back(val);
+        }else{
+            int minLast = getMin();
+            int minNow = min(minLast, val);
+            data.push_back(val);
+            minVec.push_back(minNow);
+        }
+    }
+    
+    void pop() {
+        data.pop_back();
+        minVec.pop_back();
+    }
+    
+    int top() {
+        return data.back();
+    }
+    
+    int getMin() {
+        return minVec.back();
+    }
 };
 
 /**

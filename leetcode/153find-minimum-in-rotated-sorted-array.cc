@@ -37,12 +37,13 @@ private:
 	}
 	int loop_find(vector<int>& nums, int lo, int hi){
 		int mid = 0;
-		while(lo<hi){
+		while(lo<hi) // 不能取等号，因为必须得有两个阶段
 			mid = lo + (hi -lo)/2;
 			if(nums[mid]>nums[hi]) lo = mid + 1;
-			else hi = mid ;
+			else hi = mid ; // hi 不能移动到下一个地方否则掉入第一阶段，丢失最小值
 		}
-		return nums[lo];
+		return nums[hi];
+    }        
 };
 
 
