@@ -196,7 +196,7 @@ ABCD XVC
 
 读取不定数量的字符串，按逗号分割转换为数字并转到数组中。
 
-stringstream 对象类似于cout ,cin方便完成字符串到数字的互相转换。
+stringstream 对象类似于cout ,cin方便完成字符串到数字的互相转换。Crtl + Z 在行首作为结束输入的标志
 
 ```
 #include <sstream>
