@@ -172,8 +172,9 @@ ABCD XVC
 
 ```cc
     int t;
-    cin >> t;
-    cin.ignore();// 忽略输入int 后的换行符
+    //cin>>在开头遇到结束符时会忽略，下次遇到空格、换行符和制表符结束输入，并在缓冲区中留下使输入结束的结束符(Enter、Space、Tab)，作为下次cin>>开头的忽略。
+    cin >> t; //t 后面的换行符 继续保持在缓冲区中
+    cin.ignore();// 忽略输入int 后的换行符 
     char c;
     string a = ""; 
     string b = "";
@@ -190,6 +191,37 @@ ABCD XVC
 ```
 
 需要配合`cin.ignore()`来使用否则会让a读入空。
+
+## 不定数量的字符串 特定分隔符 
+
+读取不定数量的字符串，按逗号分割转换为数字并转到数组中。
+
+stringstream 对象类似于cout ,cin方便完成字符串到数字的互相转换。
+
+```
+#include <sstream>
+void input(){
+
+    string str; 
+    vector<vector<int>> in_vec_list;
+
+    while(cin >> str) { // 按行读取到string
+        in_vec_list.push_back({});
+        stringstream ss_line(str);//string 转换到stringstream
+        string temp;
+        while (getline(ss_line, temp, ',')) { // 对stringstream 按照','作为分隔符，把数据读取到temp 字符串
+            //需要的话可以判断temp的字符串长度是不是为0，否则重复输入num。
+            stringstream ss_int(temp);
+            int num;
+            ss_int >> num; // 字符串转到int
+            in_vec_list.back().push_back(num);
+        }
+    }
+    for(int i = 0; i < in_vec_list.size(); ++i) {
+        cout_vector(in_vec_list[i]);
+    }
+}
+```
 
 
 

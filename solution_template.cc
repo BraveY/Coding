@@ -7,6 +7,7 @@
 #include <utility>
 #include <vector>
 #include <numeric>
+#include <sstream>
 
 using namespace std;
 
