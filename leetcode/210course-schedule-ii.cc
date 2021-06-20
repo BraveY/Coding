@@ -120,7 +120,7 @@ class Solution2 {
 		while (!q.empty()) {
 			int cur = q.front();
 			q.pop();
-			ans.insert(ans.begin(), cur);
+			ans.insert(ans.begin(), cur);// 插入的是当前入度为0的，表示当前最晚上的课，是一个逆序，所以插入在最前
 			numCourses--;
 			for (const int i : graph_[cur]) {
 				if (--indegree[i] == 0) q.push(i);
@@ -135,6 +135,40 @@ class Solution2 {
 	vector<vector<int>> graph_;
 };
 
+//使用优先队列来输出有顺序要求的结果
+class Solution3 {
+ public:
+	vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+		int n = prerequisites.size();
+		graph_ = vector<vector<int>> (numCourses);
+		vector<int> indegree(numCourses);
+		vector<int> ans;
+		priority_queue<int, vector<int>, greater<int>> q;
+		for (int i = 0; i < n; i++) {
+			graph_[prerequisites[i][1]].push_back(prerequisites[i][0]); // 将图反向了，现在开始入度为0表示没有依赖的课程了
+			indegree[prerequisites[i][0]]++;
+		}
+		for (int i = 0; i < numCourses; i++) {
+			if (!indegree[i]) q.push(i);
+		}
+		while (!q.empty()) {
+			int cur = q.top();
+			q.pop();
+			// ans.insert(ans.begin(), cur);// 插入的是当前入度为0的，表示当前最晚上的课，是一个逆序，所以插入在最前
+            ans.push_back(cur);
+			numCourses--;
+			for (const int i : graph_[cur]) {
+				if (--indegree[i] == 0) q.push(i);
+			}
+		}
+		if (!numCourses) return ans;
+		ans.clear();
+		return ans;
+	}
+
+ private:
+	vector<vector<int>> graph_;
+};
 void cout_vector(vector<int>& nums) {
 	for (auto i : nums) {
 		cout << i << ' ';

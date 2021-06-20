@@ -8,6 +8,7 @@
 #include <vector>
 #include <numeric>
 #include <sstream>
+#include <queue>
 
 using namespace std;
 
@@ -55,6 +56,13 @@ void debug() {
     //ListNode* head = stringToListNode("[1,3,2]");
 	// prettyPrintLinkedList(head);
 	return;
+}
+
+// 记录一些常用的函数与API等
+void memo() {
+	vector<int> nums;
+	priority_queue<int> pq(nums.begin(), nums.end()); // 最大堆 返回队列中最大的
+	priority_queue<int, vector<int>, greater<int>> pq; // 最小堆
 }
 
 int main(int argc, char const *argv[]) {
