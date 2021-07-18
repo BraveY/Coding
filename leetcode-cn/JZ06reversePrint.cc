@@ -15,7 +15,7 @@
 #include <utility>
 #include <vector>
 #include <numeric>
-#include "../lclist.h"
+#include "lclist.h"
 
 using namespace std;
 

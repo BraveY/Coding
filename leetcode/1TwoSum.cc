@@ -10,6 +10,7 @@
 /*
 https://leetcode.com/problems/two-sum/
  */
+using namespace std;
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
